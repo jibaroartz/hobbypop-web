@@ -9,7 +9,7 @@ Lee data/*.json y src/body.html y escribe:
 
 Uso:  python3 scripts/generar.py
 """
-import json, pathlib, html, shutil
+import json, pathlib, html, datetime, re
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 DOMINIO = "https://hobbypop.co"
@@ -17,11 +17,20 @@ cargar = lambda n: json.loads((RAIZ / "data" / n).read_text(encoding="utf-8"))
 grupos, tiendas, vendedores = cargar("grupos.json"), cargar("tiendas.json"), cargar("vendedores.json")
 cuerpo = (RAIZ / "src" / "body.html").read_text(encoding="utf-8")
 
-DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores}, ensure_ascii=False).replace("</", "<\\/")
+# Entradas del blog: solo las que ya llegaron a su fecha de publicacion (hora de Panama)
+import os
+hoy = os.environ.get("HOBBYPOP_HOY") or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=-5))).date().isoformat()  # HOBBYPOP_HOY=2026-11-09 para probar
+posts_todos = cargar("posts.json") if (RAIZ / "data" / "posts.json").exists() else []
+posts = [p for p in posts_todos if p["publicar"] <= hoy]
+MESES = "enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre".split()
+fecha_es = lambda f: f"{int(f[8:])} de {MESES[int(f[5:7])-1]} de {f[:4]}"
+
+DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts}, ensure_ascii=False).replace("</", "<\\/")
 e = html.escape
 
-def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True):
-    og = f"{DOMINIO}/assets/og.png"
+def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True, og=None, entrada=""):
+    og = og or f"{DOMINIO}/assets/og.png"
+    body = cuerpo.replace("<!--ENTRADA-->", entrada)
     robots = "" if indexar else '<meta name="robots" content="noindex">\n'
     return f"""<!doctype html>
 <html lang="es">
@@ -47,7 +56,7 @@ def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True):
 <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-{cuerpo}
+{body}
 <script>window.DATA={DATA};window.RUTA={json.dumps(ruta_js)};</script>
 <script src="/js/app.js"></script>
 </body>
@@ -77,8 +86,19 @@ for v in vendedores:
     escribir(f"vendedor/{v['s']}/index.html", pagina(f"{v['n']} · Vendedor de confianza | Hobby Pop", desc, ruta, f"vendedor-{v['s']}", indexar=not v.get("ejemplo")))
     if not v.get("ejemplo"): urls.append(ruta)
 
+for p in posts:
+    ruta = f"/blog/{p['s']}/"
+    texto = (RAIZ / "contenido" / "blog" / f"{p['s']}.html").read_text(encoding="utf-8")
+    texto = re.sub(r"^(<hr/?>)+", "", texto)
+    orig = f'<p class="art-orig">Publicado originalmente en <a href="{e(p["medium"])}" target="_blank" rel="noopener">Medium</a>.</p>' if p.get("medium") else ""
+    art = (f'<article class="art"><span class="meta">{e(p["c"])} · {fecha_es(p["f"])} · {p["min"]} min de lectura</span>'
+           f'<h1>{e(p["t"])}</h1><div class="art-body">{texto}</div>{orig}'
+           f'<div class="row"><a class="btn" href="/#comunidad" data-join="comunidad">Unirme a la comunidad</a><a class="btn g" href="/#blog">Más entradas</a></div></article>')
+    escribir(f"blog/{p['s']}/index.html", pagina(f"{p['t']} | Blog de Hobby Pop", p["r"], ruta, f"blog-{p['s']}", og=p.get("img") or None, entrada=art))
+    urls.append(ruta)
+
 escribir("404.html", pagina("Página no encontrada | Hobby Pop", "Esta página no existe. Vuelve al inicio de Hobby Pop.", "/404.html", "", indexar=False))
 escribir("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
          "".join(f"  <url><loc>{DOMINIO}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
 escribir("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {DOMINIO}/sitemap.xml\n")
-print(f"OK: {len(tiendas)} tiendas, {len(vendedores)} vendedores, {len(urls)} URLs en el sitemap")
+print(f"OK: {len(tiendas)} tiendas, {len(vendedores)} vendedores, {len(posts)}/{len(posts_todos)} entradas, {len(urls)} URLs en el sitemap")

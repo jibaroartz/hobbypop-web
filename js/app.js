@@ -24,6 +24,7 @@
     var h=window.RUTA||(location.hash||'').slice(1),page=h,nav=h;
     if(h.indexOf('tienda-')===0){var st=findStore(h);if(st){renderTienda(st);page='perfil-tienda';nav='tiendas'}else{page=nav='tiendas'}}
     else if(h.indexOf('vendedor-')===0){var s=findSeller(h);if(s){renderPerfil(s);page='perfil';nav='vendedores'}else{page=nav='vendedores'}}
+    else if(h.indexOf('blog-')===0){page='entrada';nav='blog'}
     else if(PAGES.indexOf(h)<0)page=nav='inicio';
     $$('[data-page]').forEach(function(p){p.hidden=p.getAttribute('data-page')!==page});
     $$('[data-nav]').forEach(function(a){var on=a.getAttribute('data-nav')===nav;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
@@ -163,17 +164,15 @@
     $('#vacio-vend').hidden=n>0;
   });
 
-  /* Blog (ejemplos) */
-  var POSTS=[
-    {k:'Video',t:'Abriendo una caja de ejemplo',m:'Video · Ejemplo',d:'Aquí va la descripción del video, con el enlace a YouTube.'},
-    {k:'Review',t:'Review de un set de ejemplo',m:'Review · Ejemplo',d:'Qué trae la caja, qué vale la pena y para quién es.'},
-    {k:'Noticia',t:'Noticia del hobby de ejemplo',m:'Noticia · Ejemplo',d:'Lanzamientos, eventos y novedades que importan a la comunidad.'},
-    {k:'Review',t:'Otra review de ejemplo',m:'Review · Ejemplo',d:'Mi opinión sincera sobre un producto, con fotos.'}
-  ];
+  /* Blog */
+  var POSTS=D.posts.slice().sort(function(x,y){return y.publicar.localeCompare(x.publicar)||y.f.localeCompare(x.f)});
+  var MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  function fechaES(f){var a=f.split('-');return +a[2]+' de '+MESES[+a[1]-1]+' de '+a[0]}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
   function postCard(p){
-    var cls=p.k==='Video'?'v':(p.k==='Noticia'?'n':'');
-    return '<article class="post glass hov" data-k="'+p.k+'"><div class="thumb '+cls+'">'+(p.k==='Video'?'<span class="playbtn"></span>':'<span class="tl">Foto de portada</span>')+'</div>'+
-      '<div class="pbody"><span class="meta">'+p.m+'</span><h3>'+p.t+'</h3><p class="txt" style="font-size:20px">'+p.d+'</p></div></article>';
+    var cls=p.c==='Noticia'?'n':(p.c==='Historia'?'v':'');
+    return '<a class="post glass hov" href="/blog/'+p.s+'/" data-k="'+p.c+'"><div class="thumb has '+cls+'"'+(p.img?' style="background-image:url(\''+esc(p.img)+'\')"':'')+'></div>'+
+      '<div class="pbody"><span class="meta">'+p.c+' \u00b7 '+fechaES(p.f)+' \u00b7 '+p.min+' min</span><h3>'+esc(p.t)+'</h3><p class="txt" style="font-size:20px">'+esc(p.r)+'</p></div></a>';
   }
   $('#home-posts').innerHTML=POSTS.slice(0,3).map(postCard).join('');
   var lp=$('#lista-posts');lp.innerHTML=POSTS.map(postCard).join('');

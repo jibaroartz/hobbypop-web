@@ -333,3 +333,25 @@ details .ans{padding:0 22px 22px;font-size:21px;line-height:1.25;max-width:60ch;
   .blob,.tk,.orbit .lg,.fc,.playbtn,.pin .halo,.dotlive{animation:none!important}
   .slide,.hov{transition:none!important}
 }
+/* Blog: tarjetas con portada y entrada */
+a.post{text-decoration:none;color:inherit}
+.thumb.has{background-size:cover;background-position:center;background-repeat:no-repeat}
+.thumb.has::before{display:none}
+.art{max-width:760px;display:flex;flex-direction:column;gap:22px}
+.art h1{font-weight:900;text-transform:uppercase;font-size:clamp(38px,8vw,72px);line-height:.92;text-wrap:balance;overflow-wrap:break-word}
+.art-body{display:flex;flex-direction:column;gap:20px;font-weight:600;font-size:clamp(21px,2.6vw,24px);line-height:1.38;min-width:0}
+.art-body p,.art-body li{max-width:62ch;text-wrap:pretty;overflow-wrap:break-word}
+.art-body h2,.art-body h3,.art-body h4{font-weight:900;text-transform:uppercase;line-height:1;margin-top:10px;text-wrap:balance}
+.art-body h2{font-size:clamp(32px,5vw,44px)}.art-body h3{font-size:clamp(28px,4vw,36px)}.art-body h4{font-size:26px}
+.art-body ul,.art-body ol{padding-left:1.3em;display:flex;flex-direction:column;gap:10px;list-style:revert}
+.art-body a{color:var(--am);text-underline-offset:3px}
+.art-body strong,.art-body b{font-weight:900}
+.art-body figure{margin:6px 0;display:flex;flex-direction:column;gap:8px}
+.art-body img{display:block;width:100%;height:auto;border-radius:18px}
+.art-body figcaption{font-size:17px;opacity:.75}
+.art-body hr{border:0;height:1px;background:var(--line);width:100%;margin:6px 0}
+.art-body blockquote{margin:0;padding:6px 0 6px 18px;border-left:4px solid var(--am);font-size:1.05em}
+.art-body iframe.yt{width:100%;aspect-ratio:16/9;height:auto;border:0;border-radius:18px}
+.art-body pre{overflow-x:auto;max-width:100%}
+.art-orig{font-size:18px;opacity:.8}
+.art-orig a{color:var(--am)}
