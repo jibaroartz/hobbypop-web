@@ -19,7 +19,7 @@ def slug(t):
     t = re.sub(r"[^a-z0-9]+", "-", t).strip("-")
     return t[:70].rstrip("-")
 
-INICIAL = [  # las 10 que salen el lunes (partes del titulo)
+INICIAL = [  # las 10 que salen el primer dia (partes del titulo)
     "10 razones para coleccionar", "10 Consejos para iniciar", "Glosario de Trading Cards",
     "saber el precio de mis tarjetas", "almacenar y proteger", "grados de condici",
     "Errores comunes de coleccionistas", "empezar a coleccionar tarjetas deportivas con poco",
@@ -83,15 +83,15 @@ for f in sorted(origen.glob("*.html")):
     posts.append({"s": sg, "t": titulo, "f": fecha, "r": resumen, "c": prev.get("c", categoria(titulo)),
                   "img": portada, "min": max(1, round(palabras / 200)), "medium": medium, "publicar": prev.get("publicar", "")})
 
-# calendario: 10 el lunes 2026-11-09 y 1 por dia desde el 10
-d = datetime.date(2026, 11, 10)
+# calendario: 10 el domingo 2026-11-08 y 1 por dia desde el 9
+d = datetime.date(2026, 11, 9)
 posts.sort(key=lambda p: p["f"])
 for p in posts:
     if p["publicar"]: continue
-    if any(k.lower() in p["t"].lower() for k in INICIAL): p["publicar"] = "2026-11-09"
+    if any(k.lower() in p["t"].lower() for k in INICIAL): p["publicar"] = "2026-11-08"
 for p in posts:
     if not p["publicar"]:
         p["publicar"] = d.isoformat(); d += datetime.timedelta(days=1)
 posts.sort(key=lambda p: p["f"], reverse=True)
 pj.write_text(json.dumps(posts, ensure_ascii=False, indent=1), "utf-8")
-print(len(posts), "entradas;", sum(p["publicar"] == "2026-11-09" for p in posts), "para el lunes")
+print(len(posts), "entradas;", sum(p["publicar"] == "2026-11-08" for p in posts), "para el lunes")
