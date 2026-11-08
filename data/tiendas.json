@@ -1,0 +1,96 @@
+[
+  {
+    "s": "ejemplo-1",
+    "n": "Tienda de ejemplo 1",
+    "z": "Ciudad de Panamá",
+    "b": "Barrio de ejemplo",
+    "t": [
+      "TCG",
+      "Entretenimiento"
+    ],
+    "h": "Lun a sáb · 10 a. m. a 7 p. m.",
+    "ig": "@tienda.ejemplo1",
+    "v": true,
+    "x": 215,
+    "y": 150,
+    "ejemplo": true
+  },
+  {
+    "s": "ejemplo-2",
+    "n": "Tienda de ejemplo 2",
+    "z": "Ciudad de Panamá",
+    "b": "Barrio de ejemplo",
+    "t": [
+      "Deportivas"
+    ],
+    "h": "Todos los días · 11 a. m. a 8 p. m.",
+    "ig": "@tienda.ejemplo2",
+    "v": true,
+    "x": 330,
+    "y": 205,
+    "ejemplo": true
+  },
+  {
+    "s": "ejemplo-3",
+    "n": "Tienda de ejemplo 3",
+    "z": "Ciudad de Panamá",
+    "b": "Centro comercial de ejemplo",
+    "t": [
+      "TCG",
+      "Deportivas"
+    ],
+    "h": "Lun a dom · 10 a. m. a 9 p. m.",
+    "ig": "@tienda.ejemplo3",
+    "v": false,
+    "x": 410,
+    "y": 135,
+    "ejemplo": true
+  },
+  {
+    "s": "ejemplo-4",
+    "n": "Tienda de ejemplo 4",
+    "z": "Panamá Oeste",
+    "b": "Barrio de ejemplo",
+    "t": [
+      "TCG"
+    ],
+    "h": "Mar a dom · 12 m. d. a 8 p. m.",
+    "ig": "@tienda.ejemplo4",
+    "v": true,
+    "x": 110,
+    "y": 250,
+    "ejemplo": true
+  },
+  {
+    "s": "ejemplo-5",
+    "n": "Tienda de ejemplo 5",
+    "z": "Panamá Oeste",
+    "b": "Barrio de ejemplo",
+    "t": [
+      "Entretenimiento"
+    ],
+    "h": "Lun a sáb · 10 a. m. a 6 p. m.",
+    "ig": "@tienda.ejemplo5",
+    "v": false,
+    "x": 170,
+    "y": 95,
+    "ejemplo": true
+  },
+  {
+    "s": "ejemplo-6",
+    "n": "Tienda de ejemplo 6",
+    "z": "Otras provincias",
+    "b": "Ciudad de ejemplo",
+    "t": [
+      "TCG",
+      "Deportivas",
+      "Entretenimiento"
+    ],
+    "h": "Lun a sáb · 9 a. m. a 6 p. m.",
+    "ig": "@tienda.ejemplo6",
+    "v": false,
+    "x": 505,
+    "y": 225,
+    "ejemplo": true
+  }
+]

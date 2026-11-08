@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hobbypop.co/sitemap.xml

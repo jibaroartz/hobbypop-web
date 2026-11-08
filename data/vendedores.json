@@ -1,0 +1,70 @@
+[
+  {
+    "s": "ejemplo-1",
+    "n": "Vendedor de ejemplo 1",
+    "z": "Ciudad de Panamá",
+    "do": [
+      "Vende",
+      "Cambia"
+    ],
+    "c": [
+      "Deportivas"
+    ],
+    "d": "Tarjetas deportivas de jugadores panameños, numeradas y autógrafos.",
+    "ig": "@vendedor.ejemplo1",
+    "r": 14,
+    "a": "3 años",
+    "ejemplo": true
+  },
+  {
+    "s": "ejemplo-2",
+    "n": "Vendedor de ejemplo 2",
+    "z": "Panamá Oeste",
+    "do": [
+      "Vende"
+    ],
+    "c": [
+      "TCG"
+    ],
+    "d": "Sobres, cajas selladas y singles de juegos de cartas coleccionables.",
+    "ig": "@vendedor.ejemplo2",
+    "r": 9,
+    "a": "2 años",
+    "ejemplo": true
+  },
+  {
+    "s": "ejemplo-3",
+    "n": "Vendedor de ejemplo 3",
+    "z": "Ciudad de Panamá",
+    "do": [
+      "Cambia"
+    ],
+    "c": [
+      "Entretenimiento",
+      "Deportivas"
+    ],
+    "d": "Cambios de tarjetas de Marvel y Disney, y repetidas de colecciones deportivas.",
+    "ig": "@vendedor.ejemplo3",
+    "r": 6,
+    "a": "1 año",
+    "ejemplo": true
+  },
+  {
+    "s": "ejemplo-4",
+    "n": "Vendedor de ejemplo 4",
+    "z": "Ciudad de Panamá",
+    "do": [
+      "Vende",
+      "Cambia"
+    ],
+    "c": [
+      "TCG",
+      "Entretenimiento"
+    ],
+    "d": "Figuras y colecciones de TCG. Atiende por Instagram y en quedadas.",
+    "ig": "@vendedor.ejemplo4",
+    "r": 11,
+    "a": "2 años",
+    "ejemplo": true
+  }
+]
