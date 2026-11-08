@@ -1,0 +1,966 @@
+<title>Hobby Pop</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;700;800;900&display=swap">
+<style>
+/* Concepto: arcade nocturno. Fondo noche con luces de color, vidrio esmerilado,
+   degradados y brillos que hacen juego con los logos 3D. */
+:root{
+  --pop:#7B2CFF; --uva:#461A95; --noche:#140B33; --hueso:#F3EFFA;
+  --am:#FFC400; --am2:#FF9E1B; --cian:#4FE0FF;
+  --line:rgba(243,239,250,.18);
+  --f:'Sofia Sans Extra Condensed','Arial Narrow','Roboto Condensed',Impact,sans-serif;
+  --logo-h:url("__LOGO_H__");
+  --logo-p:url("__LOGO_P__");
+  --glass:linear-gradient(145deg,rgba(243,239,250,.15),rgba(243,239,250,.04));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--noche);color:var(--hueso);font-family:var(--f);font-weight:700;font-size:21px;line-height:1.28;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--noche);z-index:60}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--am);outline-offset:3px}
+.app{position:relative;z-index:1}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:radial-gradient(120% 80% at 50% -10%,#2a1065 0%,var(--noche) 60%)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
+.b1{width:60vmax;height:60vmax;left:-25vmax;top:-10vmax;background:radial-gradient(circle,var(--pop),transparent 65%);animation:drift 18s ease-in-out infinite alternate}
+.b2{width:50vmax;height:50vmax;right:-22vmax;top:30vh;background:radial-gradient(circle,#3b8cff55,transparent 65%);opacity:.5;animation:drift 22s ease-in-out infinite alternate-reverse}
+.b3{width:45vmax;height:45vmax;left:10vmax;bottom:-25vmax;background:radial-gradient(circle,#ffc40033,transparent 65%);animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(6vmax,4vmax,0) scale(1.15)}}
+.in{max-width:1240px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sec{padding-block:clamp(40px,7vw,88px)}
+.stack{display:flex;flex-direction:column;gap:clamp(18px,3vw,30px)}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.grow{flex:1}
+
+/* Tipografía */
+.h1{font-weight:900;text-transform:uppercase;font-size:clamp(50px,13vw,118px);line-height:.88;text-wrap:balance;overflow-wrap:break-word}
+.h2{font-weight:900;text-transform:uppercase;font-size:clamp(40px,7.5vw,84px);line-height:.9;text-wrap:balance;overflow-wrap:break-word}
+.h3{font-weight:900;text-transform:uppercase;font-size:clamp(26px,3.6vw,34px);line-height:.98}
+.lead{font-size:clamp(22px,3vw,29px);line-height:1.18;max-width:38ch;text-wrap:pretty;color:rgba(243,239,250,.92)}
+.txt{font-size:21px;line-height:1.25;max-width:48ch;text-wrap:pretty;color:rgba(243,239,250,.9)}
+.gt{background:linear-gradient(90deg,var(--am),var(--am2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.etq{font-weight:800;text-transform:uppercase;font-size:15px;letter-spacing:.08em;line-height:1}
+.tag{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:linear-gradient(180deg,#FFD84D,var(--am));color:var(--noche);font-weight:800;text-transform:uppercase;font-size:15px;line-height:1;letter-spacing:.08em;padding:7px 13px 6px;border-radius:999px;box-shadow:0 4px 16px rgba(255,196,0,.3);white-space:nowrap}
+.tag.g{background:var(--glass);color:var(--hueso);border:1px solid var(--line);box-shadow:none}
+.tag.p{background:linear-gradient(180deg,#9a5bff,var(--pop));color:var(--hueso);box-shadow:0 4px 16px rgba(123,44,255,.45)}
+.dotlive{width:8px;height:8px;border-radius:50%;background:var(--noche);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(1.6);opacity:.5}}
+
+/* Vidrio */
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:28px;-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);box-shadow:0 18px 44px rgba(8,3,24,.45),inset 0 1px 0 rgba(255,255,255,.22);min-width:0}
+.hov{transition:transform .25s ease,border-color .25s,box-shadow .25s}
+.hov:hover{transform:translateY(-5px);border-color:rgba(255,196,0,.55);box-shadow:0 26px 54px rgba(8,3,24,.55),0 0 0 1px rgba(255,196,0,.25),inset 0 1px 0 rgba(255,255,255,.25)}
+
+/* Botones */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:999px;font-weight:900;text-transform:uppercase;font-size:20px;letter-spacing:.03em;line-height:1;padding:15px 26px 13px;text-decoration:none;cursor:pointer;overflow:hidden;transition:transform .15s,box-shadow .2s,filter .2s;background:linear-gradient(180deg,#FFD84D,var(--am) 55%,var(--am2));color:var(--noche);box-shadow:0 10px 26px rgba(255,170,0,.35),inset 0 2px 0 rgba(255,255,255,.65),inset 0 -3px 0 rgba(180,90,0,.3)}
+.btn::after{content:"";position:absolute;left:6%;right:6%;top:4%;height:42%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);pointer-events:none}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 14px 32px rgba(255,170,0,.5),inset 0 2px 0 rgba(255,255,255,.65),inset 0 -3px 0 rgba(180,90,0,.3)}
+.btn:active{transform:translateY(1px)}
+.btn.g{background:var(--glass);color:var(--hueso);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.2);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.btn.g::after{display:none}
+.btn.p{background:linear-gradient(180deg,#9a5bff,var(--pop) 55%,var(--uva));color:var(--hueso);box-shadow:0 10px 26px rgba(123,44,255,.5),inset 0 2px 0 rgba(255,255,255,.35),inset 0 -3px 0 rgba(0,0,0,.25)}
+.btn.sm{font-size:17px;padding:11px 18px 9px}
+.btn svg,.ic svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.chip{display:inline-flex;align-items:center;border:1px solid var(--line);background:rgba(243,239,250,.06);color:var(--hueso);border-radius:999px;font-weight:800;text-transform:uppercase;font-size:16px;letter-spacing:.05em;line-height:1;padding:10px 16px 8px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.chip:hover{border-color:var(--am)}
+.chip[aria-pressed="true"]{background:linear-gradient(180deg,#FFD84D,var(--am));color:var(--noche);border-color:transparent}
+.chip.st{cursor:default;font-size:14px;padding:6px 11px 5px}
+.chip.st:hover{border-color:var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+
+/* Cabecera */
+.proto{background:rgba(70,26,149,.7);font-size:16px;line-height:1.15;position:relative;z-index:2}
+.proto .in{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding-block:8px}
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;padding-block:10px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;padding:8px 10px 8px 18px;border-radius:30px}
+.logo-h{display:block;width:176px;aspect-ratio:__AR_H__;background:var(--logo-h) center/contain no-repeat;flex:none}
+.menu-btn{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--line);border-radius:999px;font-weight:900;text-transform:uppercase;font-size:17px;padding:10px 16px 8px;cursor:pointer}
+.menu-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round}
+.nav{flex-basis:100%;display:none;flex-direction:column;gap:4px;padding:6px 0 8px}
+.hdr.open .nav{display:flex}
+.nav a{display:flex;align-items:center;gap:10px;padding:13px 16px 11px;border-radius:999px;text-decoration:none;font-weight:900;text-transform:uppercase;font-size:25px;line-height:1}
+.nav a:hover{background:rgba(243,239,250,.08)}
+.nav a.on{background:linear-gradient(180deg,#9a5bff,var(--pop));box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.nav .btn{display:none}
+.mini{background:var(--am);color:var(--noche);font-size:12px;letter-spacing:.06em;padding:4px 7px 3px;border-radius:999px;line-height:1}
+@media (min-width:1020px){
+  .menu-btn{display:none}
+  .logo-h{width:210px}
+  .nav{display:flex;flex-basis:auto;flex-direction:row;gap:2px;padding:0;align-items:center}
+  .nav a{font-size:18px;padding:11px 14px 9px}
+  .nav .btn{display:inline-flex;margin-left:8px;font-size:17px;padding:12px 20px 10px}
+}
+
+/* Hero slider */
+.hero{padding-top:clamp(8px,2vw,20px);padding-bottom:clamp(30px,5vw,60px)}
+.sl-prog{display:flex;gap:8px;margin-bottom:14px}
+.seg{flex:1;height:5px;border-radius:99px;background:rgba(243,239,250,.18);overflow:hidden;border:0;padding:0;cursor:pointer}
+.seg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--am),var(--am2));border-radius:99px}
+.seg.done i{width:100%}
+.seg.on i{animation:fill 7s linear forwards}
+.paused .seg.on i{animation-play-state:paused}
+@keyframes fill{to{width:100%}}
+.slides{display:grid}
+.slide{grid-area:1/1;position:relative;overflow:hidden;border-radius:36px;padding:clamp(22px,4.5vw,56px);display:grid;gap:20px 30px;grid-template-columns:minmax(0,1fr);align-items:center;opacity:0;visibility:hidden;transform:scale(.985);transition:opacity .7s,transform .7s,visibility 0s .7s;border:1px solid var(--line);box-shadow:0 30px 70px rgba(8,3,24,.55),inset 0 1px 0 rgba(255,255,255,.25)}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .7s,transform .7s}
+.slide::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 85% 10%,rgba(255,255,255,.2),transparent 60%);pointer-events:none}
+.s1{background:linear-gradient(140deg,#8f4dff 0%,var(--pop) 30%,var(--uva) 75%,#1d0d4d 100%)}
+.s2{background:linear-gradient(140deg,#3a1585 0%,var(--uva) 40%,var(--noche) 100%)}
+.s2::after{content:"";position:absolute;width:70%;aspect-ratio:1;right:-25%;bottom:-40%;background:radial-gradient(circle,rgba(255,196,0,.45),transparent 65%);pointer-events:none}
+.s3{background:linear-gradient(140deg,var(--pop) 0%,#5a1fd1 40%,var(--noche) 100%)}
+.s3::after{content:"";position:absolute;width:60%;aspect-ratio:1;left:-20%;bottom:-35%;background:radial-gradient(circle,rgba(79,224,255,.35),transparent 65%);pointer-events:none}
+@media (min-width:900px){.slide{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}}
+.slide .stack{position:relative;z-index:1;gap:18px}
+.slide .h1{font-size:clamp(42px,11vw,104px)}
+
+.join-bar{display:flex;align-items:center;gap:12px;padding:10px 16px 10px 12px;border-radius:999px;text-decoration:none;margin-bottom:14px}
+.join-bar .jt{flex:1;font-size:19px;line-height:1.1;text-transform:uppercase;font-weight:900;min-width:0}
+.jar{font-size:26px;font-weight:900;line-height:1;color:var(--am)}
+/* Visual del slide 1 */
+.orbit{position:relative;width:min(100%,420px);aspect-ratio:1;justify-self:center;z-index:1}
+.orbit .lg{position:absolute;inset:22% 18%;background:var(--logo-p) center/contain no-repeat;filter:drop-shadow(0 20px 30px rgba(8,3,24,.55));animation:bob 5s ease-in-out infinite}
+.fc{position:absolute;display:flex;align-items:center;gap:8px;max-width:56%;padding:7px 11px 7px 7px;border-radius:20px;font-size:15px;line-height:1.08;animation:bob 6s ease-in-out infinite}
+.fc b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:19px;padding-top:2px;background:linear-gradient(180deg,#FFD84D,var(--am));color:var(--noche)}
+.fc.a{top:2%;left:0}.fc.b{top:12%;right:0;animation-delay:-1.5s}.fc.c{bottom:12%;left:0;animation-delay:-3s}.fc.d{bottom:1%;right:2%;animation-delay:-4.5s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+/* Visual slide 2: reproductor */
+.player{position:relative;z-index:1;width:min(100%,460px);justify-self:center;padding:14px;border-radius:26px;transform:rotate(-2deg)}
+.screen{aspect-ratio:16/9;border-radius:18px;background:linear-gradient(135deg,var(--pop),var(--noche));display:grid;place-items:center;position:relative;overflow:hidden}
+.screen::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(255,255,255,.05) 22px 44px)}
+.playbtn{position:relative;width:78px;height:78px;border-radius:50%;background:linear-gradient(180deg,#FFD84D,var(--am2));display:grid;place-items:center;box-shadow:0 10px 30px rgba(255,170,0,.5),inset 0 2px 0 rgba(255,255,255,.7);animation:pulsebtn 2.2s infinite}
+.playbtn::after{content:"";margin-left:7px;border-left:24px solid var(--noche);border-top:15px solid transparent;border-bottom:15px solid transparent}
+@keyframes pulsebtn{50%{transform:scale(1.08)}}
+.bar2{height:6px;border-radius:9px;background:rgba(243,239,250,.2);margin:12px 4px 4px;overflow:hidden}.bar2 i{display:block;width:38%;height:100%;background:var(--am);border-radius:9px}
+.ptitle{padding:6px 4px 2px;font-weight:900;text-transform:uppercase;font-size:20px}
+/* Visual slide 3: perfil */
+.phone{position:relative;z-index:1;width:min(100%,360px);justify-self:center;padding:20px;border-radius:30px;transform:rotate(2deg)}
+.ph-top{display:flex;gap:14px;align-items:center}
+.ring{width:70px;height:70px;border-radius:50%;padding:3px;background:conic-gradient(var(--am),var(--am2),var(--pop),var(--cian),var(--am));flex:none}
+.ring span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--noche);font-weight:900;font-size:34px;padding-top:3px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px}
+.tiles i{aspect-ratio:3/4;border-radius:10px;display:block;background:linear-gradient(160deg,rgba(243,239,250,.2),rgba(243,239,250,.04));border:1px solid var(--line)}
+.tiles i:nth-child(2n){background:linear-gradient(160deg,rgba(255,196,0,.35),rgba(123,44,255,.2))}
+.tiles i:nth-child(3n){background:linear-gradient(160deg,rgba(79,224,255,.3),rgba(123,44,255,.25))}
+.sl-nav{display:flex;gap:10px;margin-top:14px;justify-content:flex-end}
+.arr{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;cursor:pointer;padding:0}
+.arr svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* Ticker */
+.ticker{overflow:hidden;border-block:1px solid var(--line);background:rgba(20,11,51,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.tk{display:flex;width:max-content;animation:tk 32s linear infinite}
+.tk span{display:flex;align-items:center;gap:26px;padding:16px 13px 12px;font-weight:900;text-transform:uppercase;font-size:34px;line-height:1;white-space:nowrap}
+.tk span::after{content:"";width:12px;height:12px;border-radius:50%;background:linear-gradient(180deg,#FFD84D,var(--am2))}
+.tk span:nth-child(3n+2){color:transparent;-webkit-text-stroke:1.5px var(--hueso)}
+@keyframes tk{to{transform:translateX(-50%)}}
+
+/* Encabezado de sección */
+.sh{display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(22px,4vw,40px)}
+.sh.rowh{flex-direction:row;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
+
+/* Grupos */
+.bento{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.gc{padding:24px;display:flex;flex-direction:column;gap:14px}
+.gh{display:flex;align-items:center;gap:12px}
+.gi{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-weight:900;font-size:30px;line-height:1;padding-top:3px;flex:none;color:var(--noche);background:linear-gradient(180deg,#FFD84D,var(--am2));box-shadow:0 8px 20px rgba(255,170,0,.3),inset 0 2px 0 rgba(255,255,255,.6)}
+.gi.t{background:linear-gradient(180deg,#8be9ff,var(--cian));box-shadow:0 8px 20px rgba(79,224,255,.3),inset 0 2px 0 rgba(255,255,255,.6)}
+.gi.e{background:linear-gradient(180deg,#b685ff,var(--pop));color:var(--hueso);box-shadow:0 8px 20px rgba(123,44,255,.4),inset 0 2px 0 rgba(255,255,255,.4)}
+.gi.z{background:linear-gradient(180deg,#f3effa,#cfc4ea)}
+.gh h3{font-weight:900;text-transform:uppercase;font-size:30px;line-height:.95}
+.gh p{font-size:17px;line-height:1.1;opacity:.8}
+.bub{font-size:18px;line-height:1.15;padding:10px 14px 9px;border-radius:18px;max-width:92%;background:rgba(243,239,250,.1);border:1px solid var(--line)}
+.bub.o{margin-left:auto;background:linear-gradient(180deg,#9a5bff,var(--pop));border-color:transparent}
+.bubs{display:flex;flex-direction:column;gap:8px;flex:1}
+.gc .btn{align-self:flex-start}
+.wide{grid-column:1/-1;display:grid;gap:18px 30px;grid-template-columns:minmax(0,1fr);align-items:center;padding:clamp(22px,4vw,36px);background:linear-gradient(135deg,rgba(255,196,0,.22),rgba(123,44,255,.2) 60%,rgba(243,239,250,.05))}
+@media (min-width:820px){.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
+.pts{display:flex;flex-direction:column;gap:8px;font-size:20px}
+.pts li{position:relative;padding-left:24px}
+.pts li::before{content:"";position:absolute;left:0;top:.45em;width:11px;height:11px;border-radius:50%;background:linear-gradient(180deg,#FFD84D,var(--am2))}
+
+.quick{display:grid;gap:26px 40px;grid-template-columns:minmax(0,1fr);align-items:center;padding:clamp(24px,4.5vw,50px);border-radius:36px}
+@media (min-width:900px){.quick{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.gpills{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px}
+.gp{display:flex;align-items:center;gap:12px;padding:9px 16px 9px 9px;border-radius:20px;text-decoration:none;font-weight:900;text-transform:uppercase;font-size:21px;line-height:1}
+.gp .gi{width:42px;height:42px;border-radius:13px;font-size:24px}
+/* Cifras */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (min-width:820px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{padding:22px 20px;display:flex;flex-direction:column;gap:8px}
+.stat b{font-weight:900;font-size:clamp(52px,9vw,84px);line-height:.85}
+
+/* Mapa */
+.split{display:grid;gap:clamp(24px,4vw,48px);grid-template-columns:minmax(0,1fr);align-items:center}
+@media (min-width:900px){.split{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}}
+.mapbox{overflow:hidden;aspect-ratio:3/2;width:100%;padding:0;position:relative}
+.mapbox svg{display:block;width:100%;height:100%}
+.m-bg{fill:#1b0e45}.m-land{fill:url(#mg);stroke:rgba(243,239,250,.25);stroke-width:2}
+.m-road{fill:none;stroke:rgba(243,239,250,.35);stroke-width:4;stroke-linecap:round}
+.m-grid{stroke:rgba(243,239,250,.06);stroke-width:1}
+.pin{cursor:pointer}
+.pin .halo{fill:rgba(255,196,0,.25);transform-box:fill-box;transform-origin:center;animation:halo 2.4s infinite}
+.pin .pc{fill:url(#pg);stroke:#fff;stroke-width:2.5}
+.pin text{font-family:var(--f);font-weight:900;font-size:20px;fill:#140B33;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.pin.on .pc{fill:var(--cian)}
+.pin.on .halo{fill:rgba(79,224,255,.35)}
+.pin:focus-visible{outline:none}.pin:focus-visible .pc{stroke:var(--cian);stroke-width:5}
+@keyframes halo{50%{transform:scale(1.6);opacity:.2}}
+.mapnote{font-size:16px;opacity:.75}
+.filters{display:flex;flex-direction:column;gap:12px}
+.filters .grp{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters .lab{min-width:70px;opacity:.8}
+
+/* Tiendas y vendedores */
+.lista{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.card{display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.card.sel{outline:3px solid var(--cian);outline-offset:3px}
+.cover{position:relative;height:118px;background:linear-gradient(135deg,var(--pop),var(--uva));overflow:hidden}
+.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 120% at 90% 0%,rgba(255,255,255,.3),transparent 60%),repeating-linear-gradient(115deg,transparent 0 18px,rgba(255,255,255,.06) 18px 36px)}
+.cover.c1{background:linear-gradient(135deg,var(--pop),var(--uva))}
+.cover.c2{background:linear-gradient(135deg,#d99a00,var(--pop))}
+.cover.c3{background:linear-gradient(135deg,#1a8fb0,var(--uva))}
+.cover .ctag{position:absolute;right:12px;top:12px;font-size:13px;color:var(--hueso);background:rgba(20,11,51,.55);border:1px solid var(--line);padding:5px 9px 4px;border-radius:99px;letter-spacing:.07em;text-transform:uppercase;font-weight:800;line-height:1}
+.cbody{display:flex;flex-direction:column;gap:12px;padding:0 22px 22px;flex:1}
+.slot{position:relative;margin-top:-40px;width:84px;height:84px;border-radius:24px;flex:none;display:grid;place-items:center;text-align:center;background:linear-gradient(145deg,#2b1670,var(--noche));border:2px dashed rgba(243,239,250,.45);box-shadow:0 10px 24px rgba(8,3,24,.5);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;line-height:1.05;padding:6px}
+.slot svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 3px;display:block}
+.slot.round{border-radius:50%}
+.nm{display:flex;gap:12px;align-items:flex-end;justify-content:space-between}
+.card h3{font-weight:900;text-transform:uppercase;font-size:30px;line-height:.95}
+.sub{font-size:18px;line-height:1.1;opacity:.82}
+.ver{display:inline-flex;align-items:center;gap:6px}
+.ver svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.datos{display:flex;flex-direction:column;gap:6px;font-size:18px;line-height:1.15}
+.datos div{display:flex;gap:10px}.datos b{font-weight:800;text-transform:uppercase;font-size:14px;letter-spacing:.08em;min-width:70px;padding-top:3px;opacity:.7}
+.card .row{margin-top:auto;padding-top:4px}
+.vacio{padding:26px;border-radius:24px;font-size:22px}
+.caps{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cap{padding:12px 14px 10px;border-radius:18px;background:rgba(243,239,250,.07);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.cap .etq{opacity:.75;font-size:13px}
+.cap b{font-weight:900;font-size:40px;line-height:.85}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.shot{aspect-ratio:3/4;border-radius:14px;border:1px dashed rgba(243,239,250,.35);background:linear-gradient(160deg,rgba(243,239,250,.12),rgba(243,239,250,.03));display:grid;place-items:center;text-align:center;font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.07em;line-height:1.1;padding:6px;opacity:.9}
+.sbody{display:flex;flex-direction:column;gap:14px;padding:22px}
+.sttop{display:flex;gap:16px;align-items:center}
+.sttop .slot{margin-top:0;width:92px;height:92px;border-color:rgba(255,196,0,.7)}
+
+/* Perfil */
+.pf{display:grid;gap:22px 34px;grid-template-columns:minmax(0,1fr);padding:clamp(22px,4vw,40px)}
+@media (min-width:900px){.pf{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start}}
+.pf .slot{margin-top:0;width:124px;height:124px;border-color:rgba(255,196,0,.7)}
+.pf .slot svg{width:34px;height:34px}
+.pf-top{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.pf .caps{grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr))}.cap{min-width:0}
+.pf .cap b{font-size:36px}
+.pf .shots{grid-template-columns:repeat(3,1fr)}
+.link{font:800 19px/1.2 var(--f);background:rgba(20,11,51,.55);border:1px solid var(--line);border-radius:16px;padding:12px 14px;overflow-wrap:anywhere}
+.tp{overflow:hidden}
+.tp .cover{height:clamp(130px,26vw,220px)}
+.tp-body{display:grid;gap:22px 34px;grid-template-columns:minmax(0,1fr);padding:0 clamp(20px,4vw,40px) clamp(22px,4vw,40px)}
+@media (min-width:900px){.tp-body{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start}}
+.tp .slot{width:112px;height:112px;margin-top:-56px;border-color:rgba(255,196,0,.7)}
+.fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fotos .shot{aspect-ratio:1}
+/* Blog */
+.posts{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.post{display:flex;flex-direction:column;overflow:hidden}
+.thumb{position:relative;aspect-ratio:16/9;display:grid;place-items:center;background:linear-gradient(135deg,var(--pop),var(--uva))}
+.thumb.v{background:linear-gradient(135deg,#d99a00,var(--pop) 60%,var(--noche))}
+.thumb.n{background:linear-gradient(135deg,#1a8fb0,var(--uva))}
+.thumb::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 20px,rgba(255,255,255,.06) 20px 40px)}
+.thumb .tl{position:relative;font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;opacity:.9}
+.thumb .playbtn{width:60px;height:60px}
+.thumb .playbtn::after{border-left-width:19px;border-top-width:12px;border-bottom-width:12px;margin-left:5px}
+.pbody{display:flex;flex-direction:column;gap:10px;padding:20px 22px 22px;flex:1}
+.post h3{font-weight:900;text-transform:uppercase;font-size:30px;line-height:.95;text-wrap:balance}
+.meta{font-size:15px;opacity:.75;letter-spacing:.07em;text-transform:uppercase;font-weight:800}
+
+.search{display:flex;align-items:center;gap:12px;padding:6px 8px 6px 20px;border-radius:999px;max-width:560px}
+.search svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;opacity:.8}
+.search input{flex:1;min-width:0;background:transparent;border:0;color:var(--hueso);font:800 22px var(--f);padding:12px 8px 10px;outline:none}
+.search input::placeholder{color:rgba(243,239,250,.55)}
+.search:focus-within{border-color:var(--am)}
+/* Newsletter */
+.nl{padding:clamp(26px,5vw,56px);display:grid;gap:24px;grid-template-columns:minmax(0,1fr);align-items:center;background:linear-gradient(135deg,rgba(123,44,255,.55),rgba(70,26,149,.35) 60%,rgba(255,196,0,.12));border-radius:36px}
+@media (min-width:900px){.nl{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}}
+.nl form{display:flex;flex-direction:column;gap:12px}
+.field{width:100%;border:1px solid var(--line);border-radius:999px;background:rgba(20,11,51,.55);color:var(--hueso);font:800 21px var(--f);padding:15px 22px 13px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.field::placeholder{color:rgba(243,239,250,.55)}
+.nl-msg{font-size:19px;line-height:1.15;min-height:1.15em}
+
+/* Comunidad, reglas, FAQ */
+.glist{display:grid;gap:18px}
+.gr{display:grid;gap:16px 28px;grid-template-columns:minmax(0,1fr);padding:clamp(20px,3vw,30px);align-items:start}
+.gr>*{min-width:0}
+@media (min-width:820px){.gr{grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr)}}
+.three{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr))}
+.box{padding:26px;display:flex;flex-direction:column;gap:12px}
+.num{font-weight:900;font-size:64px;line-height:.8}
+.rgrid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr))}
+.rc{padding:26px;display:flex;flex-direction:column;gap:12px}
+.rc ul{display:flex;flex-direction:column;gap:8px;font-size:20px;line-height:1.18}
+.rc li{position:relative;padding-left:22px}
+.rc li::before{content:"";position:absolute;left:0;top:.5em;width:10px;height:10px;border-radius:50%;background:linear-gradient(180deg,#FFD84D,var(--am2))}
+.faq{display:flex;flex-direction:column;gap:12px}
+details{border-radius:24px}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px 18px;font-weight:900;text-transform:uppercase;font-size:26px;line-height:1}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(180deg,#FFD84D,var(--am2));color:var(--noche);display:grid;place-items:center;font-size:28px;padding-bottom:3px;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details .ans{padding:0 22px 22px;font-size:21px;line-height:1.25;max-width:60ch;color:rgba(243,239,250,.9)}
+.tpl{font:700 19px/1.25 var(--f);background:rgba(20,11,51,.55);border:1px solid var(--line);border-radius:18px;padding:14px 16px;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.ph{padding-top:clamp(16px,4vw,40px)}
+.soon{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+.soon .glass{padding:16px;display:flex;flex-direction:column;gap:10px;filter:blur(2.5px);opacity:.8}
+.soon i{display:block;aspect-ratio:3/4;border-radius:14px;background:linear-gradient(160deg,rgba(255,196,0,.3),rgba(123,44,255,.4))}
+.soon b{display:block;height:14px;border-radius:9px;background:rgba(243,239,250,.25);width:70%}
+
+/* Pie */
+.foot{padding-block:clamp(36px,6vw,70px);border-top:1px solid var(--line);background:rgba(20,11,51,.6)}
+.foot-grid{display:grid;gap:28px 48px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:860px){.foot-grid{grid-template-columns:1.2fr 1fr 1fr}}
+.foot .logo-h{width:190px}
+.foot ul{display:flex;flex-direction:column;gap:8px;font-size:21px}
+.foot a{text-decoration:none}.foot a:hover{text-decoration:underline;text-underline-offset:4px}
+.small{font-size:17px;line-height:1.2;opacity:.8;max-width:60ch}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,24px);background:rgba(243,239,250,.95);color:var(--noche);font-weight:900;font-size:19px;line-height:1.15;border-radius:999px;padding:14px 24px 12px;box-shadow:0 14px 34px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:70;max-width:min(92vw,520px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Movimiento al desplazar */
+.js .rv{opacity:0;transform:translateY(30px) scale(.985);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .rv{opacity:1;transform:none;transition:none}
+  .blob,.tk,.orbit .lg,.fc,.playbtn,.pin .halo,.dotlive{animation:none!important}
+  .slide,.hov{transition:none!important}
+}
+</style>
+
+<div class="bg" aria-hidden="true"><div class="blob b1" data-p="0.06"></div><div class="blob b2" data-p="-0.05"></div><div class="blob b3" data-p="0.04"></div></div>
+
+<div class="app">
+<div class="proto" role="note"><div class="in"><span class="tag g">Prototipo</span><span>Tiendas, vendedores, artículos y enlaces son de ejemplo.</span></div></div>
+
+<header class="hdr" id="hdr">
+  <div class="in">
+    <div class="bar glass">
+      <a class="logo-h" href="#inicio" aria-label="Hobby Pop, ir al inicio"></a>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>Menú</button>
+      <nav class="nav" id="nav" aria-label="Principal">
+        <a href="#inicio" data-nav="inicio">Inicio</a>
+        <a href="#tiendas" data-nav="tiendas">Tiendas</a>
+        <a href="#vendedores" data-nav="vendedores">Vendedores</a>
+        <a href="#comunidad" data-nav="comunidad">Comunidad</a>
+        <a href="#blog" data-nav="blog">Blog</a>
+        <a href="#contacto" data-nav="contacto">Contacto</a>
+        <a class="btn" href="#comunidad" data-join="comunidad">Unirme</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ============ INICIO ============ -->
+<main data-page="inicio">
+  <section class="hero">
+    <div class="in"><a class="join-bar glass hov" href="#contacto"><span class="tag">Nuevo</span><span class="jt">¿Tienes una tienda o vendes cartas? <b class="gt">Quiero aparecer</b></span><span class="jar" aria-hidden="true">→</span></a></div>
+    <div class="in" id="slider" aria-roledescription="carrusel" aria-label="Sigue a Hobby Pop">
+      <div class="sl-prog" id="sl-prog"></div>
+      <div class="slides">
+        <article class="slide s1 on" aria-label="1 de 3">
+          <div class="stack">
+            <span class="tag"><span class="dotlive"></span>Comunidad en WhatsApp</span>
+            <h1 class="h1">Coleccionar es mejor <span class="gt">en comunidad</span></h1>
+            <p class="lead">El lugar en español de los coleccionistas de tarjetas. Nacimos en Panamá. Elige tu grupo y entra.</p>
+            <div class="row"><a class="btn" href="#comunidad" data-join="comunidad">Unirme a la comunidad</a><a class="btn g" href="#comunidad">Ver los grupos</a></div>
+          </div>
+          <div class="orbit" aria-hidden="true">
+            <div class="lg"></div>
+            <div class="fc a glass"><b>S</b><span>¿Alguien tiene la checklist de Prizm?</span></div>
+            <div class="fc b glass"><b style="background:linear-gradient(180deg,#8be9ff,var(--cian))">T</b><span>¿La mando a graduar?</span></div>
+            <div class="fc c glass"><b style="background:linear-gradient(180deg,#b685ff,var(--pop));color:var(--hueso)">E</b><span>Abre ya, queremos ver los pulls.</span></div>
+            <div class="fc d glass"><b style="background:linear-gradient(180deg,#f3effa,#cfc4ea)">Z</b><span>Madrid o Barça. Argumenta.</span></div>
+          </div>
+        </article>
+
+        <article class="slide s2" aria-label="2 de 3" aria-hidden="true">
+          <div class="stack">
+            <span class="tag"><span class="dotlive"></span>YouTube</span>
+            <h2 class="h1">Mira los videos de <span class="gt">Jibaro</span></h2>
+            <p class="lead">Aperturas, reviews y todo lo que pasa en el hobby. Suscríbete para no perderte ninguno.</p>
+            <div class="row"><a class="btn" href="#blog" data-yt><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>Ver el canal</a><a class="btn g" href="#blog">Ir al blog</a></div>
+          </div>
+          <div class="player glass" aria-hidden="true">
+            <div class="screen"><span class="playbtn"></span></div>
+            <div class="bar2"><i></i></div>
+            <div class="ptitle">Apertura de caja · Ejemplo</div>
+          </div>
+        </article>
+
+      </div>
+      <div class="sl-nav">
+        <button class="arr glass" type="button" id="sl-prev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="arr glass" type="button" id="sl-next" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="tk">
+    <span>Hobby Sports</span><span>Hobby TCG</span><span>Hobby Entertainment</span><span>Zona Fans</span><span>Intercambio y Venta</span><span>Coleciona. Conecta. Comparte.</span>
+    <span>Hobby Sports</span><span>Hobby TCG</span><span>Hobby Entertainment</span><span>Zona Fans</span><span>Intercambio y Venta</span><span>Coleciona. Conecta. Comparte.</span>
+  </div></div>
+
+  <section class="sec">
+    <div class="in">
+      <div class="quick glass">
+        <div class="stack" style="gap:16px">
+          <span class="tag">Los grupos</span>
+          <h2 class="h2">Un grupo para <span class="gt">cada tema</span></h2>
+          <p class="lead">Conversa en Sports, TCG, Entertainment y Zona Fans. Compra, vende y cambia en Intercambio y Venta.</p>
+          <div class="row"><a class="btn" href="#comunidad">Conocer los grupos</a><a class="btn g" href="#comunidad" data-join="comunidad">Unirme</a></div>
+        </div>
+        <div class="gpills">
+          <a class="gp glass hov" href="#comunidad"><span class="gi">S</span>Hobby Sports</a>
+          <a class="gp glass hov" href="#comunidad"><span class="gi t">T</span>Hobby TCG</a>
+          <a class="gp glass hov" href="#comunidad"><span class="gi e">E</span>Hobby Entertainment</a>
+          <a class="gp glass hov" href="#comunidad"><span class="gi z">Z</span>Zona Fans</a>
+          <a class="gp glass hov" href="#comunidad"><span class="gi">V</span>Intercambio y Venta</a>
+          <a class="gp glass hov" href="#comunidad"><span class="gi e">A</span>Avisos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="in">
+      <div class="stats">
+        <div class="stat glass"><b class="gt" data-count="300" data-pre="+">+300</b><span class="etq">Coleccionistas</span></div>
+        <div class="stat glass"><b class="gt" data-count="4">4</b><span class="etq">Grupos temáticos</span></div>
+        <div class="stat glass"><b class="gt">100%</b><span class="etq">En español</span></div>
+        <div class="stat glass"><b class="gt">PTY</b><span class="etq">Hecho en Panamá</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="in split">
+      <div class="stack">
+        <span class="tag">Directorio</span>
+        <h2 class="h2">Tiendas de hobby <span class="gt">en Panamá</span></h2>
+        <p class="lead">Dónde comprar, jugar y coleccionar, con su ubicación en el mapa y la misma información para todas.</p>
+        <div class="row"><a class="btn" href="#tiendas">Ver las tiendas</a></div>
+      </div>
+      <div class="mapbox glass" id="mapa-home" aria-label="Vista previa del mapa de tiendas"></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="in">
+      <div class="sh rowh"><div class="stack" style="gap:14px"><span class="tag">Confianza</span><h2 class="h2">Vendedores que <span class="gt">conocemos</span></h2></div><a class="btn g" href="#vendedores">Ver todos</a></div>
+      <div class="lista" id="home-vend"></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="in">
+      <div class="sh rowh"><div class="stack" style="gap:14px"><span class="tag">Blog</span><h2 class="h2">Lo último del <span class="gt">blog</span></h2></div><a class="btn g" href="#blog">Ver todo</a></div>
+      <div class="posts" id="home-posts"></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="in">
+      <div class="nl glass">
+        <div class="stack" style="gap:14px"><h2 class="h2">Coleciona. <span class="gt">Conecta.</span> Comparte.</h2><p class="txt">Una vez por semana te contamos qué pasa en el hobby: eventos, hallazgos y novedades de la comunidad.</p></div>
+        <form id="nl-form" novalidate>
+          <label class="etq" for="nl-mail">Tu correo</label>
+          <input class="field" id="nl-mail" type="email" inputmode="email" autocomplete="email" placeholder="nombre@correo.com" required>
+          <button class="btn" type="submit" style="align-self:flex-start">Suscribirme</button>
+          <p class="nl-msg" id="nl-msg" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ TIENDAS ============ -->
+<main data-page="tiendas" hidden>
+  <section class="sec ph"><div class="in stack">
+    <span class="tag">Directorio</span>
+    <h1 class="h1">Tiendas de <span class="gt">hobby</span></h1>
+    <p class="lead">Todas las tiendas de Panamá con la misma información básica. La insignia Verificada significa que confirmamos la dirección.</p>
+    <div class="split" style="align-items:start">
+      <div class="stack" style="gap:18px">
+        <div class="filters" id="f-tiendas">
+          <div class="grp"><span class="etq lab">Zona</span>
+            <button type="button" class="chip" data-key="z" data-val="" aria-pressed="true">Todas</button>
+            <button type="button" class="chip" data-key="z" data-val="Ciudad de Panamá" aria-pressed="false">Ciudad de Panamá</button>
+            <button type="button" class="chip" data-key="z" data-val="Panamá Oeste" aria-pressed="false">Panamá Oeste</button>
+            <button type="button" class="chip" data-key="z" data-val="Otras provincias" aria-pressed="false">Otras provincias</button></div>
+          <div class="grp"><span class="etq lab">Tipo</span>
+            <button type="button" class="chip" data-key="t" data-val="" aria-pressed="true">Todo</button>
+            <button type="button" class="chip" data-key="t" data-val="TCG" aria-pressed="false">TCG</button>
+            <button type="button" class="chip" data-key="t" data-val="Deportivas" aria-pressed="false">Deportivas</button>
+            <button type="button" class="chip" data-key="t" data-val="Entretenimiento" aria-pressed="false">Entretenimiento</button></div>
+        </div>
+        <p class="etq" id="cuenta-tiendas" role="status" style="opacity:.8"></p>
+      </div>
+      <div><div class="mapbox glass" id="mapa-tiendas" aria-label="Mapa de tiendas"></div>
+        <p class="mapnote" style="margin-top:12px">Mapa ilustrativo. En la página real será un mapa de OpenStreetMap con las ubicaciones reales.</p></div>
+    </div>
+    <div class="lista" id="lista-tiendas"></div>
+    <div class="vacio glass" id="vacio-tiendas" hidden>No hay tiendas con ese filtro. Prueba con otra zona o tipo.</div>
+    <div class="glass box" style="max-width:760px"><h3 class="h3">¿Tienes una tienda?</h3><p class="txt">Pide aparecer en el directorio. Revisamos cada solicitud y confirmamos la dirección.</p>
+      <div class="row"><a class="btn" href="#contacto">Solicitar que aparezca mi tienda</a></div></div>
+  </div></section>
+</main>
+
+<!-- ============ VENDEDORES ============ -->
+<main data-page="vendedores" hidden>
+  <section class="sec ph"><div class="in stack">
+    <span class="tag">Confianza</span>
+    <h1 class="h1">Vendedores que <span class="gt">Hobby Pop conoce</span></h1>
+    <p class="lead">Personas que compran, venden o cambian con regularidad y a quienes conocemos hace tiempo. Las referencias las recogen ellos y las publicamos en su perfil.</p>
+    <div class="filters" id="f-vend"><div class="grp"><span class="etq lab">Categoría</span>
+      <button type="button" class="chip" data-val="" aria-pressed="true">Todas</button>
+      <button type="button" class="chip" data-val="Deportivas" aria-pressed="false">Deportivas</button>
+      <button type="button" class="chip" data-val="TCG" aria-pressed="false">TCG</button>
+      <button type="button" class="chip" data-val="Entretenimiento" aria-pressed="false">Entretenimiento</button></div></div>
+    <div class="lista" id="lista-vend"></div>
+    <div class="vacio glass" id="vacio-vend" hidden>No hay vendedores en esa categoría por ahora.</div>
+    <div class="three">
+      <div class="box glass"><h3 class="h3">Cómo leer un perfil</h3><p class="txt">Cada perfil muestra qué vende o cambia la persona, dónde suele estar y las capturas de referencias que nos envió.</p></div>
+      <div class="box glass"><h3 class="h3">Privacidad</h3><p class="txt">Publicamos las capturas con nombres y fotos de otras personas difuminados.</p></div>
+      <div class="box glass"><h3 class="h3">Hobby Pop no interviene</h3><p class="txt">Cada compra, venta o cambio es un acuerdo entre las partes. Pide referencias y desconfía de ofertas demasiado buenas.</p></div>
+    </div>
+    <div class="row"><a class="btn" href="#contacto">Quiero aparecer</a></div>
+  </div></section>
+</main>
+
+<!-- ============ PERFIL DE TIENDA ============ -->
+<main data-page="perfil-tienda" hidden>
+  <section class="sec ph"><div class="in stack">
+    <a class="btn g sm" href="#tiendas" style="align-self:flex-start">← Todas las tiendas</a>
+    <div id="tienda-box" class="stack"></div>
+  </div></section>
+</main>
+
+<!-- ============ PERFIL DE VENDEDOR ============ -->
+<main data-page="perfil" hidden>
+  <section class="sec ph"><div class="in stack">
+    <a class="btn g sm" href="#vendedores" style="align-self:flex-start">← Todos los vendedores</a>
+    <div id="perfil-box" class="stack"></div>
+  </div></section>
+</main>
+
+<!-- ============ COMUNIDAD ============ -->
+<main data-page="comunidad" hidden>
+  <section class="sec ph"><div class="in stack">
+    <span class="tag">Comunidad en WhatsApp</span>
+    <h1 class="h1">Aquí nadie colecciona <span class="gt">solo</span></h1>
+    <p class="lead">Hobby Pop reúne a cientos de coleccionistas en Panamá. Cada tema tiene su grupo para que encuentres lo que te interesa sin ruido.</p>
+    <div class="row"><a class="btn" href="#comunidad" data-join="comunidad">Unirme a la comunidad</a><a class="btn g" href="#reglas">Leer las reglas</a></div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="in stack">
+    <h2 class="h2">Elige tus <span class="gt">grupos</span></h2>
+    <div class="glist">
+      <article class="gr glass"><div class="stack" style="gap:14px"><div class="gh"><span class="gi">S</span><div><h3>Hobby Sports</h3><p>Coleccionismo deportivo</p></div></div><div class="row"><a class="btn sm" href="#comunidad" data-join="sports">Unirme</a></div></div>
+        <div class="stack" style="gap:10px"><p class="txt">Tarjetas, stickers y coleccionables deportivos. Pulls, hallazgos, checklists y novedades.</p><p class="txt" style="opacity:.75">Aquí se conversa, no se vende. Para vender, usa Intercambio y Venta.</p><div class="bubs"><p class="bub">¿Alguien tiene la checklist de Prizm Mundial 2026?</p><p class="bub o">Te la paso. Revisa los paralelos numerados.</p></div></div></article>
+      <article class="gr glass"><div class="stack" style="gap:14px"><div class="gh"><span class="gi t">T</span><div><h3>Hobby TCG</h3><p>Juegos de cartas</p></div></div><div class="row"><a class="btn sm" href="#comunidad" data-join="tcg">Unirme</a></div></div>
+        <div class="stack" style="gap:10px"><p class="txt">Pokémon, Magic, Lorcana y más. Lanzamientos, mazos, pulls y dudas.</p><p class="txt" style="opacity:.75">Aquí se conversa, no se vende.</p><div class="bubs"><p class="bub">Abrí un sobre y salió una holo. ¿La mando a graduar?</p><p class="bub o">Mira el centrado primero. Raw o graded, tú decides.</p></div></div></article>
+      <article class="gr glass"><div class="stack" style="gap:14px"><div class="gh"><span class="gi e">E</span><div><h3>Hobby Entertainment</h3><p>Marvel, Disney y figuras</p></div></div><div class="row"><a class="btn sm" href="#comunidad" data-join="ent">Unirme</a></div></div>
+        <div class="stack" style="gap:10px"><p class="txt">Marvel, Disney, figuras y coleccionables que no son deportes ni juegos de cartas. Estrenos, novedades y hallazgos.</p><p class="txt" style="opacity:.75">Aquí se conversa, no se vende.</p><div class="bubs"><p class="bub">Llegó la caja nueva de Marvel. ¿Quién la quiere ver?</p><p class="bub o">Ábrela ya, queremos ver los pulls.</p></div></div></article>
+      <article class="gr glass"><div class="stack" style="gap:14px"><div class="gh"><span class="gi z">Z</span><div><h3>Zona Fans</h3><p>Debates sanos</p></div></div><div class="row"><a class="btn sm" href="#comunidad" data-join="fans">Unirme</a></div></div>
+        <div class="stack" style="gap:10px"><p class="txt">Real Madrid contra Barcelona, quién es el mejor y todo lo que dé para discutir. Rivalidad sí, ataques no.</p><p class="txt" style="opacity:.75">Sin apuestas deportivas ni promoción de apuestas.</p><div class="bubs"><p class="bub">Real Madrid o Barcelona. Argumenta.</p><p class="bub o">Madrid. Y con respeto al rival, como siempre.</p></div></div></article>
+      <article class="gr glass" style="background:linear-gradient(135deg,rgba(255,196,0,.2),rgba(123,44,255,.18) 60%,rgba(243,239,250,.05))"><div class="stack" style="gap:14px"><div class="gh"><span class="gi">V</span><div><h3>Intercambio y Venta</h3><p>El único lugar para vender</p></div></div><div class="row"><a class="btn sm" href="#comunidad" data-join="venta">Unirme</a></div></div>
+        <div class="stack" style="gap:10px"><p class="txt">Aquí se compra, se vende y se cambia. Solo eso. Para conversar, usa los otros grupos.</p><ul class="pts"><li>Toda venta lleva el precio visible.</li><li>En los cambios, di qué buscas.</li><li>Dudas sobre una pieza: por privado con el vendedor.</li></ul><div class="bubs"><p class="bub">Vendo Prizm Mundial 2026 Maple /86 · $18</p><p class="bub o">Me interesa. Te escribo por privado.</p></div></div></article>
+      <article class="gr glass"><div class="stack" style="gap:14px"><div class="gh"><span class="gi e">A</span><div><h3>Avisos</h3><p>Solo administradores</p></div></div><div class="row"><a class="btn sm" href="#comunidad" data-join="avisos">Unirme</a></div></div>
+        <div class="stack" style="gap:10px"><p class="txt">Lo importante de toda la comunidad: eventos, grupos nuevos y cambios. Aquí solo escriben los administradores.</p><div class="bubs"><p class="bub">Nuevo grupo disponible: Hobby TCG. Entra desde la página.</p></div></div></article>
+    </div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="in stack">
+    <h2 class="h2">Cómo <span class="gt">funciona</span></h2>
+    <div class="three">
+      <div class="box glass"><span class="num gt">1</span><h3 class="h3">Cada cosa en su grupo</h3><p class="txt">Un grupo por tema. Así no pierdes lo que te importa entre mensajes de otros temas.</p></div>
+      <div class="box glass"><span class="num gt">2</span><h3 class="h3">Se vende en un solo lugar</h3><p class="txt">Intercambio y Venta es solo para eso. En los demás grupos se conversa.</p></div>
+      <div class="box glass"><span class="num gt">3</span><h3 class="h3">Respeto primero</h3><p class="txt">Pocas reglas y claras. Hay menores en la comunidad, así que damos el ejemplo.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="in stack">
+    <h2 class="h2">Preguntas <span class="gt">frecuentes</span></h2>
+    <div class="faq">
+      <details class="glass"><summary>¿Cómo me uno?</summary><div class="ans">Entra a la comunidad con el botón de arriba y elige los grupos que te interesan. Puedes estar en todos o en uno solo.</div></details>
+      <details class="glass"><summary>¿Cómo vendo mis tarjetas?</summary><div class="ans">En el grupo Intercambio y Venta. Cada publicación lleva el precio visible. En los demás grupos no se vende.</div></details>
+      <details class="glass"><summary>¿Cómo aparezco en el directorio?</summary><div class="ans">Si tienes una tienda, o si compras y vendes con regularidad y la comunidad te conoce, escríbenos desde Contacto. Revisamos cada solicitud.</div></details>
+      <details class="glass"><summary>¿Qué es raw, graded y break?</summary><div class="ans">Raw es una tarjeta sin graduar. Graded es una tarjeta que una empresa de gradeo revisó, puntuó y encapsuló. Un break es abrir una caja entre varias personas y repartir las tarjetas por equipo o por cupo.</div></details>
+      <details class="glass"><summary>¿Se llena mi celular de fotos?</summary><div class="ans">Puedes desactivar la descarga automática de fotos en WhatsApp y bajar solo las que te interesen. Está en Ajustes, Almacenamiento y datos.</div></details>
+      <details class="glass"><summary>¿Hay menores en la comunidad?</summary><div class="ans">Sí. Por eso pedimos respeto en todos los grupos y no permitimos contenido inapropiado.</div></details>
+    </div>
+  </div></section>
+</main>
+
+<!-- ============ BLOG ============ -->
+<main data-page="blog" hidden>
+  <section class="sec ph"><div class="in stack">
+    <span class="tag">Blog de Hobby Pop</span>
+    <h1 class="h1">El <span class="gt">blog</span></h1>
+    <p class="lead">Reviews, noticias del hobby y los videos de mi canal de YouTube.</p>
+    <div class="search glass"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q-blog" type="search" placeholder="Buscar en el blog" aria-label="Buscar en el blog" autocomplete="off"></div>
+    <div class="chips" id="f-blog">
+      <button type="button" class="chip" data-val="" aria-pressed="true">Todo</button>
+      <button type="button" class="chip" data-val="Review" aria-pressed="false">Reviews</button>
+      <button type="button" class="chip" data-val="Noticia" aria-pressed="false">Noticias</button>
+      <button type="button" class="chip" data-val="Video" aria-pressed="false">Videos</button>
+    </div>
+    <div class="posts" id="lista-posts"></div>
+    <div class="vacio glass" id="vacio-blog" hidden>No encontramos nada con esa búsqueda. Prueba con otra palabra.</div>
+    <div class="glass box" style="max-width:760px"><h3 class="h3">Suscríbete al canal</h3><p class="txt">Los videos nuevos se publican primero en YouTube.</p>
+      <div class="row"><a class="btn" href="#blog" data-yt>Ir a YouTube</a></div></div>
+  </div></section>
+</main>
+
+<!-- ============ CONTACTO ============ -->
+<main data-page="contacto" hidden>
+  <section class="sec ph"><div class="in stack">
+    <h1 class="h1">Hablemos <span class="gt">de hobby</span></h1>
+    <p class="lead">Escríbenos por WhatsApp o Instagram. Si quieres aparecer en la página, copia la plantilla, complétala y mándala.</p>
+    <div class="row">
+      <a class="btn" href="#contacto" data-wa=""><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Escríbenos por WhatsApp</a>
+      <span class="chip st" style="font-size:18px;padding:10px 16px 8px">+507 6443-7573</span>
+      <a class="btn g" href="https://www.instagram.com/hobbypop7/" target="_blank" rel="noopener">Instagram @hobbypop7</a>
+    </div>
+    <div class="three">
+      <div class="box glass"><h3 class="h3">Quiero que mi tienda aparezca</h3><p class="txt">Revisamos la solicitud y confirmamos la dirección antes de publicar.</p>
+        <pre class="tpl" id="tpl-tienda">Hola, quiero que mi tienda aparezca en el directorio de Hobby Pop.
+Nombre de la tienda:
+Zona y dirección:
+Horario:
+Tipo (TCG, deportivas, entretenimiento):
+Instagram o WhatsApp:
+Logo (lo envío como imagen):</pre>
+        <div class="row"><a class="btn sm" href="#contacto" data-wa="tpl-tienda"><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Soy tienda, quiero aparecer</a><button class="btn g sm" type="button" data-copy-el="tpl-tienda">Copiar</button></div></div>
+      <div class="box glass"><h3 class="h3">Quiero aparecer como vendedor</h3><p class="txt">Solo incluimos a personas que conocemos hace tiempo. Tú recoges tus referencias y nos mandas las capturas.</p>
+        <pre class="tpl" id="tpl-vend">Hola, quiero aparecer en Vendedores que Hobby Pop conoce.
+Apodo:
+Zona:
+Qué vendo o cambio:
+Instagram:
+Desde cuándo estoy en la comunidad:
+Quién me conoce en los grupos:
+Foto de perfil (la envío como imagen):</pre>
+        <div class="row"><a class="btn sm" href="#contacto" data-wa="tpl-vend"><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Soy vendedor, quiero aparecer</a><button class="btn g sm" type="button" data-copy-el="tpl-vend">Copiar</button></div></div>
+    </div>
+  </div></section>
+</main>
+
+<!-- ============ REGLAS ============ -->
+<main data-page="reglas" hidden>
+  <section class="sec ph"><div class="in stack">
+    <span class="tag">Términos de la comunidad</span>
+    <h1 class="h1">Reglas de la <span class="gt">comunidad</span></h1>
+    <p class="lead">Pocas y claras. Al participar en nuestros grupos, se entiende que cada miembro las conoce y acepta.</p>
+    <div class="rgrid">
+      <article class="rc glass"><h3 class="h3">Respeto entre todos</h3><ul><li>Nada de insultos, burlas, ataques personales, discriminación ni palabras obscenas.</li><li>Podemos debatir y pensar distinto, siempre con respeto.</li><li>Los problemas personales se resuelven fuera de los grupos.</li></ul></article>
+      <article class="rc glass"><h3 class="h3">Ventas e intercambios</h3><ul><li>Todo se vende y se cambia únicamente en Intercambio y Venta.</li><li>Ese grupo es solo para eso. Para conversar, usa los otros.</li><li>Toda venta incluye el precio visible. Es obligatorio, sin excepciones.</li><li>En los intercambios, indica qué buscas o un valor de referencia.</li><li>Dudas sobre una pieza o consejos sobre un precio: por privado con el vendedor.</li><li>Sin burlas ni críticas destructivas sobre los precios o tarjetas de otros.</li><li>Sin subastas improvisadas fuera de las dinámicas autorizadas.</li></ul></article>
+      <article class="rc glass"><h3 class="h3">Cada cosa en su grupo</h3><ul><li>Intercambio y Venta: solo comprar, vender y cambiar.</li><li>Hobby Sports: coleccionismo deportivo.</li><li>Hobby TCG: juegos de cartas coleccionables.</li><li>Hobby Entertainment: Marvel, Disney, figuras y otros coleccionables.</li><li>Zona Fans: debates de equipos y jugadores, sin apuestas.</li><li>Avisos: lo importante de toda la comunidad. Escriben los administradores.</li></ul></article>
+      <article class="rc glass"><h3 class="h3">Fotos</h3><ul><li>Sube las fotos que quieras, son parte del hobby.</li><li>Si no quieres que tu celular se llene, desactiva la descarga automática de fotos en WhatsApp y baja solo las que te interesen.</li></ul></article>
+      <article class="rc glass"><h3 class="h3">Contenido prohibido</h3><ul><li>Enlaces de piratería o contenido ilegal.</li><li>Apuestas deportivas y su promoción.</li><li>Contenido ofensivo, inapropiado o ajeno al propósito de los grupos.</li><li>Spam, publicidad repetitiva y cadenas reenviadas.</li></ul></article>
+      <article class="rc glass"><h3 class="h3">Debates y Zona Fans</h3><ul><li>Las rivalidades, bromas y debates sanos son bienvenidos.</li><li>No se toleran provocaciones constantes, insultos ni ataques personales o familiares.</li><li>Las diferencias deportivas nunca deben volverse conflictos personales.</li></ul></article>
+      <article class="rc glass"><h3 class="h3">Seamos ejemplo</h3><ul><li>En la comunidad también participan niños y menores de edad.</li><li>Como adultos y coleccionistas, promovamos el respeto y el compañerismo.</li></ul></article>
+      <article class="rc glass"><h3 class="h3">Responsabilidad</h3><ul><li>Hobby Pop es una comunidad, no una tienda ni un intermediario. Cada compra, venta o cambio es un acuerdo entre las partes.</li><li>Te recomendamos pedir referencias y desconfiar de ofertas demasiado buenas.</li></ul></article>
+      <article class="rc glass"><h3 class="h3">Igualdad y cumplimiento</h3><ul><li>Todos los miembros tenemos las mismas reglas, sin privilegios.</li><li>La administración puede eliminar publicaciones que las incumplan.</li><li>Según la gravedad o la reincidencia, habrá advertencia o expulsión del grupo.</li><li>Las faltas graves o repetidas pueden llevar a la expulsión de toda la comunidad.</li></ul></article>
+    </div>
+    <p class="lead" style="max-width:none">Hagamos de Hobby Pop un espacio donde todos se sientan bienvenidos.</p>
+  </div></section>
+</main>
+
+<footer class="foot">
+  <div class="in foot-grid">
+    <div class="stack" style="gap:16px">
+      <a class="logo-h" href="#inicio" aria-label="Hobby Pop, ir al inicio"></a>
+      <p class="lead" style="font-size:24px">La comunidad en español de coleccionistas de tarjetas.</p>
+      <p class="small">Hobby Pop es una comunidad, no una tienda ni un intermediario. Cada compra, venta o cambio es un acuerdo entre las partes.</p>
+    </div>
+    <div class="stack" style="gap:14px"><span class="etq gt">Explora</span>
+      <ul><li><a href="#tiendas">Tiendas</a></li><li><a href="#vendedores">Vendedores</a></li><li><a href="#comunidad">Comunidad</a></li><li><a href="#blog">Blog</a></li><li><a href="#reglas">Reglas</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
+    <div class="stack" style="gap:14px"><span class="etq gt">Síguenos</span>
+      <ul><li><a href="https://www.instagram.com/hobbypop7/" target="_blank" rel="noopener">Instagram @hobbypop7</a></li><li><a href="https://www.instagram.com/jibarocards/" target="_blank" rel="noopener">Jibaro @jibarocards</a></li></ul>
+      <p class="small">WhatsApp: +507 6443-7573</p><p class="small">Coleciona. Conecta. Comparte.</p><p class="small">© 2026 Hobby Pop · Hecho en Panamá</p></div>
+  </div>
+</footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="mg" cx="30%" cy="20%" r="90%"><stop offset="0" stop-color="#9a5bff"/><stop offset="1" stop-color="#461A95"/></radialGradient>
+    <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD84D"/><stop offset="1" stop-color="#FF9E1B"/></linearGradient>
+  </defs>
+</svg>
+
+<script>
+(function(){
+  /* Datos de ejemplo. Reemplázalos con los reales. */
+  var LINKS={comunidad:'https://chat.whatsapp.com/JCmGns5Va6NEV4vSlyOfck',sports:'https://chat.whatsapp.com/EMRdTlfOYvy4waiFfs89rt?mode=gi_t',tcg:'https://chat.whatsapp.com/H9bu7zSh6xn878RpyJAzCy?mode=gi_t',ent:'https://chat.whatsapp.com/BBLgUUBpK2x8A2xzxYl12Y?mode=gi_t',fans:'https://chat.whatsapp.com/HfQfMVmFm499K0C3jAVTqz?mode=gi_t',venta:'https://chat.whatsapp.com/HrGhxJy5iXr4fltxEiYjC8?mode=gi_t',avisos:'https://chat.whatsapp.com/JCmGns5Va6NEV4vSlyOfck'};
+  var NOMBRES={comunidad:'la comunidad',sports:'Hobby Sports',tcg:'Hobby TCG',ent:'Hobby Entertainment',fans:'Zona Fans',venta:'Intercambio y Venta',avisos:'Avisos'};
+  var STORES=[
+    {s:'ejemplo-1',n:'Tienda de ejemplo 1',z:'Ciudad de Panamá',b:'Barrio de ejemplo',t:['TCG','Entretenimiento'],h:'Lun a sáb · 10 a. m. a 7 p. m.',ig:'@tienda.ejemplo1',v:true,x:215,y:150},
+    {s:'ejemplo-2',n:'Tienda de ejemplo 2',z:'Ciudad de Panamá',b:'Barrio de ejemplo',t:['Deportivas'],h:'Todos los días · 11 a. m. a 8 p. m.',ig:'@tienda.ejemplo2',v:true,x:330,y:205},
+    {s:'ejemplo-3',n:'Tienda de ejemplo 3',z:'Ciudad de Panamá',b:'Centro comercial de ejemplo',t:['TCG','Deportivas'],h:'Lun a dom · 10 a. m. a 9 p. m.',ig:'@tienda.ejemplo3',v:false,x:410,y:135},
+    {s:'ejemplo-4',n:'Tienda de ejemplo 4',z:'Panamá Oeste',b:'Barrio de ejemplo',t:['TCG'],h:'Mar a dom · 12 m. d. a 8 p. m.',ig:'@tienda.ejemplo4',v:true,x:110,y:250},
+    {s:'ejemplo-5',n:'Tienda de ejemplo 5',z:'Panamá Oeste',b:'Barrio de ejemplo',t:['Entretenimiento'],h:'Lun a sáb · 10 a. m. a 6 p. m.',ig:'@tienda.ejemplo5',v:false,x:170,y:95},
+    {s:'ejemplo-6',n:'Tienda de ejemplo 6',z:'Otras provincias',b:'Ciudad de ejemplo',t:['TCG','Deportivas','Entretenimiento'],h:'Lun a sáb · 9 a. m. a 6 p. m.',ig:'@tienda.ejemplo6',v:false,x:505,y:225}
+  ];
+  var SELLERS=[
+    {s:'ejemplo-1',n:'Vendedor de ejemplo 1',z:'Ciudad de Panamá',do:['Vende','Cambia'],c:['Deportivas'],d:'Tarjetas deportivas de jugadores panameños, numeradas y autógrafos.',ig:'@vendedor.ejemplo1',r:14,a:'3 años'},
+    {s:'ejemplo-2',n:'Vendedor de ejemplo 2',z:'Panamá Oeste',do:['Vende'],c:['TCG'],d:'Sobres, cajas selladas y singles de juegos de cartas coleccionables.',ig:'@vendedor.ejemplo2',r:9,a:'2 años'},
+    {s:'ejemplo-3',n:'Vendedor de ejemplo 3',z:'Ciudad de Panamá',do:['Cambia'],c:['Entretenimiento','Deportivas'],d:'Cambios de tarjetas de Marvel y Disney, y repetidas de colecciones deportivas.',ig:'@vendedor.ejemplo3',r:6,a:'1 año'},
+    {s:'ejemplo-4',n:'Vendedor de ejemplo 4',z:'Ciudad de Panamá',do:['Vende','Cambia'],c:['TCG','Entretenimiento'],d:'Figuras y colecciones de TCG. Atiende por Instagram y en quedadas.',ig:'@vendedor.ejemplo4',r:11,a:'2 años'}
+  ];
+  var CHECK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var IMG='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 9"/></svg>';
+  var USER='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>';
+  function $(s,r){return (r||document).querySelector(s)}
+  function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+  var toastT;
+  function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show')},2600)}
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* Rutas */
+  var PAGES=['inicio','tiendas','vendedores','comunidad','blog','contacto','reglas'];
+  function closeMenu(){$('#hdr').classList.remove('open');$('#menu-btn').setAttribute('aria-expanded','false')}
+  function findStore(h){for(var k=0;k<STORES.length;k++)if('tienda-'+STORES[k].s===h)return STORES[k];return null}
+  function findSeller(h){for(var k=0;k<SELLERS.length;k++)if('vendedor-'+SELLERS[k].s===h)return SELLERS[k];return null}
+  function route(){
+    var h=(location.hash||'').slice(1),page=h,nav=h;
+    if(h.indexOf('tienda-')===0){var st=findStore(h);if(st){renderTienda(st);page='perfil-tienda';nav='tiendas'}else{page=nav='tiendas'}}
+    else if(h.indexOf('vendedor-')===0){var s=findSeller(h);if(s){renderPerfil(s);page='perfil';nav='vendedores'}else{page=nav='vendedores'}}
+    else if(PAGES.indexOf(h)<0)page=nav='inicio';
+    $$('[data-page]').forEach(function(p){p.hidden=p.getAttribute('data-page')!==page});
+    $$('[data-nav]').forEach(function(a){var on=a.getAttribute('data-nav')===nav;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    closeMenu();window.scrollTo(0,0);setTimeout(reveal,60);
+  }
+  window.addEventListener('hashchange',route);
+  $('#menu-btn').addEventListener('click',function(){var o=$('#hdr').classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false')});
+
+  /* Enlaces */
+  $$('[data-join]').forEach(function(a){
+    var k=a.getAttribute('data-join');
+    if(LINKS[k]){a.href=LINKS[k];a.target='_blank';a.rel='noopener'}
+    else a.addEventListener('click',function(e){e.preventDefault();toast('Aquí irá el enlace de invitación a '+NOMBRES[k])});
+  });
+  var YT='https://www.youtube.com/@jibarocards';
+  $$('[data-yt]').forEach(function(a){
+    if(YT){a.href=YT;a.target='_blank';a.rel='noopener'}
+    else a.addEventListener('click',function(e){e.preventDefault();toast('Aquí irá el enlace al canal de YouTube')});
+  });
+  function copy(text,ok,node){
+    function fb(){if(node){var r=document.createRange();r.selectNodeContents(node);var s=getSelection();s.removeAllRanges();s.addRange(r);toast('Selecciona y copia el texto')}else toast(text)}
+    try{navigator.clipboard.writeText(text).then(function(){toast(ok)},fb)}catch(e){fb()}
+  }
+  $$('[data-copy-el]').forEach(function(b){b.addEventListener('click',function(){var n=document.getElementById(b.getAttribute('data-copy-el'));copy(n.textContent,'Plantilla copiada. Pégala en WhatsApp o Instagram.',n)})});
+  /* WhatsApp: pon aquí el número de Hobby Pop con código de país, sin + ni espacios (ej. 507XXXXXXXX) */
+  var WA_NUM='50764437573';
+  $$('[data-wa]').forEach(function(a){
+    var id=a.getAttribute('data-wa'),n=id?document.getElementById(id):null;
+    var txt=n?n.textContent:'Hola, quiero escribirle a Hobby Pop.';
+    a.href='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(txt);
+    a.target='_blank';a.rel='noopener';
+  });
+
+  /* Mapa ilustrativo */
+  function mapSVG(list,sel){
+    var grid='';for(var i=1;i<12;i++)grid+='<line class="m-grid" x1="'+i*50+'" y1="0" x2="'+i*50+'" y2="400"/>';for(i=1;i<8;i++)grid+='<line class="m-grid" x1="0" y1="'+i*50+'" x2="600" y2="'+i*50+'"/>';
+    var pins=list.map(function(s,i){return '<g class="pin'+(sel===i?' on':'')+'" data-i="'+i+'" transform="translate('+s.x+' '+s.y+')" tabindex="0" role="button" aria-label="'+s.n+'"><circle class="halo" r="26"/><circle class="pc" r="17"/><text>'+(i+1)+'</text></g>'}).join('');
+    return '<svg viewBox="0 0 600 400" role="img" aria-label="Mapa ilustrativo"><rect class="m-bg" width="600" height="400"/>'+grid+
+      '<path class="m-land" d="M-10 70 C70 30 170 80 260 55 C360 28 460 70 610 18 L610 300 C520 335 470 285 390 318 C300 352 250 305 170 335 C100 360 40 335 -10 355Z"/>'+
+      '<path class="m-road" d="M20 330 C120 250 230 225 320 150 S480 70 580 60"/><path class="m-road" d="M90 70 C140 140 200 200 230 300"/><path class="m-road" d="M300 60 C340 130 380 190 430 300"/><path class="m-road" d="M30 200 C180 215 380 190 590 235"/>'+pins+'</svg>';
+  }
+
+  /* Tiendas */
+  var state={z:'',t:'',sel:-1};
+  var mapHome=$('#mapa-home'),mapT=$('#mapa-tiendas'),listT=$('#lista-tiendas');
+  mapHome.innerHTML=mapSVG(STORES,-1);mapHome.style.cursor='pointer';
+  mapHome.addEventListener('click',function(){location.hash='tiendas'});
+  function storeCard(s,i){
+    var q=encodeURIComponent('tienda de cartas coleccionables Panamá'),c='c'+(i%3+1);
+    return '<article class="card glass hov" data-i="'+i+'" id="st-'+i+'">'+
+      '<div class="cover '+c+'"><span class="ctag">Ejemplo</span></div>'+
+      '<div class="cbody"><div class="nm"><div class="slot" aria-label="Aquí va el logo de la tienda">'+IMG+'Logo</div>'+(s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+'</div>'+
+      '<div><h3>'+s.n+'</h3><p class="sub">'+s.b+' · '+s.z+'</p></div>'+
+      '<div class="chips">'+s.t.map(function(t){return '<span class="chip st">'+t+'</span>'}).join('')+'</div>'+
+      '<div class="datos"><div><b>Horario</b><span>'+s.h+'</span></div><div><b>Redes</b><span>'+s.ig+'</span></div></div>'+
+      '<div class="row"><a class="btn sm" href="#tienda-'+s.s+'">Ver perfil</a><a class="btn g sm" href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Maps</a><a class="btn g sm" href="https://waze.com/ul?q='+q+'" target="_blank" rel="noopener">Waze</a></div></div></article>';
+  }
+  listT.innerHTML=STORES.map(storeCard).join('');
+  function match(s){return (!state.z||s.z===state.z)&&(!state.t||s.t.indexOf(state.t)>-1)}
+  function pick(i){
+    state.sel=i;
+    $$('.card',listT).forEach(function(c){c.classList.toggle('sel',+c.getAttribute('data-i')===i)});
+    $$('.pin',mapT).forEach(function(p){p.classList.toggle('on',+p.getAttribute('data-i')===i)});
+    var c=document.getElementById('st-'+i);if(c&&!c.hidden)c.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+  }
+  function applyT(){
+    var n=0;
+    STORES.forEach(function(s,i){var ok=match(s);if(ok)n++;var c=document.getElementById('st-'+i);if(c)c.hidden=!ok;var p=$('.pin[data-i="'+i+'"]',mapT);if(p)p.style.display=ok?'':'none'});
+    $('#cuenta-tiendas').textContent=n+(n===1?' tienda de ejemplo':' tiendas de ejemplo');
+    $('#vacio-tiendas').hidden=n>0;
+  }
+  mapT.innerHTML=mapSVG(STORES,-1);
+  mapT.addEventListener('click',function(e){var p=e.target.closest('.pin');if(p)pick(+p.getAttribute('data-i'))});
+  mapT.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.closest('.pin')){e.preventDefault();pick(+e.target.closest('.pin').getAttribute('data-i'))}});
+  listT.addEventListener('click',function(e){var c=e.target.closest('.card');if(c&&!e.target.closest('a'))pick(+c.getAttribute('data-i'))});
+  listT.addEventListener('dblclick',function(e){var c=e.target.closest('.card');if(c)location.hash='tienda-'+STORES[+c.getAttribute('data-i')].s});
+  $('#f-tiendas').addEventListener('click',function(e){
+    var b=e.target.closest('.chip');if(!b)return;
+    var k=b.getAttribute('data-key');state[k]=b.getAttribute('data-val');
+    $$('.chip[data-key="'+k+'"]',this).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    applyT();
+  });
+  applyT();
+
+  /* Vendedores */
+  function sellerCard(s){
+    return '<article class="card glass hov" data-c="'+s.c.join('|')+'" data-s="'+s.s+'"><div class="sbody">'+
+      '<div class="sttop"><div class="slot round" aria-label="Aquí va la foto de perfil">'+USER+'Foto</div><div><h3>'+s.n+'</h3><p class="sub">'+s.z+' · Ejemplo</p></div></div>'+
+      '<div class="chips">'+s.do.map(function(d){return '<span class="tag p">'+d+'</span>'}).join('')+s.c.map(function(c){return '<span class="chip st">'+c+'</span>'}).join('')+'</div>'+
+      '<p class="txt" style="font-size:20px">'+s.d+'</p>'+
+      '<div class="caps"><div class="cap"><span class="etq">Referencias</span><b class="gt">'+s.r+'</b></div><div class="cap"><span class="etq">En la comunidad</span><b class="gt" style="font-size:32px;padding-top:7px">'+s.a+'</b></div></div>'+
+      '<div class="row"><a class="btn sm" href="#vendedor-'+s.s+'">Ver perfil</a><a class="btn g sm" href="https://www.instagram.com/" target="_blank" rel="noopener">'+s.ig+'</a></div></div></article>';
+  }
+  function renderTienda(s){
+    var url=location.href.split('#')[0]+'#tienda-'+s.s,q=encodeURIComponent('tienda de cartas coleccionables Panamá'),i=STORES.indexOf(s);
+    var fotos='';for(var k=0;k<6;k++)fotos+='<div class="shot">Foto del local</div>';
+    $('#tienda-box').innerHTML='<article class="tp glass"><div class="cover c'+(i%3+1)+'"><span class="ctag">Perfil de ejemplo</span></div><div class="tp-body">'+
+      '<div class="stack" style="gap:18px"><div class="slot" aria-label="Aquí va el logo de la tienda">'+IMG+'Logo</div>'+
+      (s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+
+      '<h1 class="h1" style="font-size:clamp(40px,9vw,76px)">'+s.n+'</h1><p class="sub">'+s.b+' · '+s.z+'</p>'+
+      '<div class="glass box" style="gap:10px"><h3 class="h3">Qué manejan</h3><div class="chips">'+s.t.map(function(t){return '<span class="chip st">'+t+'</span>'}).join('')+'</div><p class="txt">Aquí va la descripción de la tienda: qué venden, qué eventos hacen y lo que quieran contar.</p></div>'+
+      '<div class="glass box" style="gap:10px"><h3 class="h3">Visítalos</h3><div class="datos"><div><b>Horario</b><span>'+s.h+'</span></div><div><b>Redes</b><span>'+s.ig+'</span></div><div><b>Zona</b><span>'+s.b+', '+s.z+'</span></div></div>'+
+      '<div class="row"><a class="btn sm" href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Google Maps</a><a class="btn g sm" href="https://waze.com/ul?q='+q+'" target="_blank" rel="noopener">Waze</a></div></div></div>'+
+      '<div class="stack" style="gap:18px"><div class="mapbox glass" id="mapa-tienda"></div>'+
+      '<div class="glass box"><h3 class="h3">Fotos del local</h3><div class="fotos">'+fotos+'</div></div>'+
+      '<div class="glass box"><h3 class="h3">Comparte esta tienda</h3><div class="link" id="tp-link">'+url+'</div><div class="row"><button class="btn sm" type="button" id="tp-copy">Copiar enlace</button><a class="btn g sm" id="tp-wa" href="#" target="_blank" rel="noopener">Compartir por WhatsApp</a></div></div></div>'+
+      '</div></article>';
+    var one=[{n:s.n,x:300,y:200}];$('#mapa-tienda').innerHTML=mapSVG(one,0);
+    $('#tp-wa').href='https://wa.me/?text='+encodeURIComponent('Visita '+s.n+' en Hobby Pop: '+url);
+    $('#tp-copy').addEventListener('click',function(){copy(url,'Enlace copiado',$('#tp-link'))});
+  }
+  function renderPerfil(s){
+    var url=location.href.split('#')[0]+'#vendedor-'+s.s;
+    var shots='';for(var k=0;k<6;k++)shots+='<div class="shot">Captura de ejemplo</div>';
+    $('#perfil-box').innerHTML='<article class="pf glass"><div class="stack" style="gap:18px">'+
+      '<div class="pf-top"><div class="slot round" aria-label="Aquí va la foto de perfil">'+USER+'Foto</div><div class="stack" style="gap:10px"><span class="tag p ver">'+CHECK+'Lo conoce Hobby Pop</span><h1 class="h1" style="font-size:clamp(40px,9vw,76px)">'+s.n+'</h1><p class="sub">'+s.z+' · Perfil de ejemplo</p></div></div>'+
+      '<div class="chips">'+s.do.map(function(d){return '<span class="tag p">'+d+'</span>'}).join('')+s.c.map(function(c){return '<span class="chip st">'+c+'</span>'}).join('')+'</div>'+
+      '<p class="lead">'+s.d+'</p>'+
+      '<div class="caps"><div class="cap"><span class="etq">Referencias</span><b class="gt">'+s.r+'</b></div><div class="cap"><span class="etq">En la comunidad</span><b class="gt">'+s.a+'</b></div><div class="cap"><span class="etq">Zona</span><b class="gt" style="font-size:24px;padding-top:8px">'+s.z.split(' ')[0]+'</b></div></div>'+
+      '<div class="row"><a class="btn" href="https://www.instagram.com/" target="_blank" rel="noopener">'+s.ig+'</a></div></div>'+
+      '<div class="stack" style="gap:18px"><div class="glass box"><h3 class="h3">Referencias</h3><p class="txt">Capturas de personas que ya compraron, vendieron o cambiaron con '+s.n+'. Los nombres y las fotos de los demás están difuminados.</p><div class="shots">'+shots+'</div></div>'+
+      '<div class="glass box"><h3 class="h3">Comparte este perfil</h3><p class="txt">Es tu enlace de confianza. Mándalo a quien quieras para que vea tus referencias.</p><div class="link" id="pf-link">'+url+'</div>'+
+      '<div class="row"><button class="btn sm" type="button" id="pf-copy">Copiar enlace</button><a class="btn g sm" id="pf-wa" href="#" target="_blank" rel="noopener">Compartir por WhatsApp</a></div></div>'+
+      '<p class="small">Hobby Pop conoce a esta persona hace tiempo, pero no interviene en sus compras, ventas ni cambios. Cada trato es un acuerdo entre las partes.</p></div></article>';
+    $('#pf-wa').href='https://wa.me/?text='+encodeURIComponent('Mira mi perfil en Hobby Pop: '+url);
+    $('#pf-copy').addEventListener('click',function(){copy(url,'Enlace copiado',$('#pf-link'))});
+  }
+  $('#home-vend').innerHTML=SELLERS.slice(0,3).map(sellerCard).join('');
+  var listV=$('#lista-vend');listV.innerHTML=SELLERS.map(sellerCard).join('');
+  function goPerfil(e){var c=e.target.closest('.card[data-s]');if(c&&!e.target.closest('a'))location.hash='vendedor-'+c.getAttribute('data-s')}
+  listV.addEventListener('click',goPerfil);$('#home-vend').addEventListener('click',goPerfil);
+  $('#f-vend').addEventListener('click',function(e){
+    var b=e.target.closest('.chip');if(!b)return;
+    $$('.chip',this).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    var v=b.getAttribute('data-val'),n=0;
+    $$('.card',listV).forEach(function(c){var ok=!v||c.getAttribute('data-c').split('|').indexOf(v)>-1;c.hidden=!ok;if(ok)n++});
+    $('#vacio-vend').hidden=n>0;
+  });
+
+  /* Blog (ejemplos) */
+  var POSTS=[
+    {k:'Video',t:'Abriendo una caja de ejemplo',m:'Video · Ejemplo',d:'Aquí va la descripción del video, con el enlace a YouTube.'},
+    {k:'Review',t:'Review de un set de ejemplo',m:'Review · Ejemplo',d:'Qué trae la caja, qué vale la pena y para quién es.'},
+    {k:'Noticia',t:'Noticia del hobby de ejemplo',m:'Noticia · Ejemplo',d:'Lanzamientos, eventos y novedades que importan a la comunidad.'},
+    {k:'Review',t:'Otra review de ejemplo',m:'Review · Ejemplo',d:'Mi opinión sincera sobre un producto, con fotos.'}
+  ];
+  function postCard(p){
+    var cls=p.k==='Video'?'v':(p.k==='Noticia'?'n':'');
+    return '<article class="post glass hov" data-k="'+p.k+'"><div class="thumb '+cls+'">'+(p.k==='Video'?'<span class="playbtn"></span>':'<span class="tl">Foto de portada</span>')+'</div>'+
+      '<div class="pbody"><span class="meta">'+p.m+'</span><h3>'+p.t+'</h3><p class="txt" style="font-size:20px">'+p.d+'</p></div></article>';
+  }
+  $('#home-posts').innerHTML=POSTS.slice(0,3).map(postCard).join('');
+  var lp=$('#lista-posts');lp.innerHTML=POSTS.map(postCard).join('');
+  var bq='',bk='';
+  function applyB(){
+    var n=0;
+    $$('.post',lp).forEach(function(p){
+      var ok=(!bk||p.getAttribute('data-k')===bk)&&(!bq||p.textContent.toLowerCase().indexOf(bq)>-1);
+      p.hidden=!ok;if(ok)n++;
+    });
+    $('#vacio-blog').hidden=n>0;
+  }
+  $('#f-blog').addEventListener('click',function(e){
+    var b=e.target.closest('.chip');if(!b)return;
+    $$('.chip',this).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    bk=b.getAttribute('data-val');applyB();
+  });
+  $('#q-blog').addEventListener('input',function(){bq=this.value.trim().toLowerCase();applyB()});
+
+  /* Newsletter (demo) */
+  $('#nl-form').addEventListener('submit',function(e){
+    e.preventDefault();var m=$('#nl-mail'),out=$('#nl-msg');
+    if(!m.value||m.value.indexOf('@')<1||m.value.indexOf('.')<0){out.textContent='Revisa tu correo. Debe tener el formato nombre@correo.com.';m.focus();return}
+    out.textContent='Listo. En la página real este correo se guardará para el boletín.';m.value='';
+  });
+
+  /* Slider con barras de progreso */
+  var slides=$$('.slide'),segs=[],cur=0,prog=$('#sl-prog'),sl=$('#slider');
+  slides.forEach(function(s,i){
+    var b=document.createElement('button');b.type='button';b.className='seg';b.setAttribute('aria-label','Ir a la diapositiva '+(i+1));b.innerHTML='<i></i>';
+    b.addEventListener('click',function(){go(i)});prog.appendChild(b);segs.push(b);
+    if(!reduce)b.firstChild.addEventListener('animationend',function(){if(b.classList.contains('on'))go(cur+1)});
+  });
+  function go(i){
+    cur=(i+slides.length)%slides.length;
+    slides.forEach(function(s,k){s.classList.toggle('on',k===cur);s.setAttribute('aria-hidden',k===cur?'false':'true')});
+    segs.forEach(function(b,k){b.classList.remove('on','done');void b.offsetWidth;if(k<cur)b.classList.add('done');if(k===cur){b.classList.add('on');if(reduce)b.firstChild.style.width='100%'}});
+  }
+  $('#sl-prev').addEventListener('click',function(){go(cur-1)});
+  $('#sl-next').addEventListener('click',function(){go(cur+1)});
+  ['mouseenter','focusin','touchstart'].forEach(function(ev){sl.addEventListener(ev,function(){sl.classList.add('paused')},{passive:true})});
+  ['mouseleave','focusout','touchend'].forEach(function(ev){sl.addEventListener(ev,function(){sl.classList.remove('paused')},{passive:true})});
+  go(0);
+
+  /* Cifras animadas */
+  function counts(el){
+    var n=+el.getAttribute('data-count'),pre=el.getAttribute('data-pre')||'';
+    if(reduce){el.textContent=pre+n;return}
+    var t0=null;function f(t){if(!t0)t0=t;var p=Math.min((t-t0)/1200,1);el.textContent=pre+Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f);
+  }
+
+  /* Revelado al desplazar */
+  var io=null;
+  function reveal(){
+    if(!io)return;
+    $$('main:not([hidden]) .rv:not(.vis):not(.seen), .foot .rv:not(.vis):not(.seen)').forEach(function(el){el.classList.add('seen');io.observe(el)});
+  }
+  if('IntersectionObserver' in window){
+    document.documentElement.classList.add('js');
+    io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');var c=e.target.querySelector('[data-count]');if(c&&!c.done){c.done=1;counts(c)}io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -5% 0px'});
+    $$('main .sh, main .bento > *, main .stats > *, main .lista > *, main .posts > *, main .split > *, main .nl, main .glist > *, main .three > *, main .rgrid > *, main .faq > *, main .stack > .lead, main .stack > .h1, main .soon > *, .foot-grid > *').forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*80+'ms'});
+    reveal();
+  }
+
+  /* Luces de fondo con paralaje */
+  var blobs=$$('.blob'),tick=false;
+  if(!reduce)window.addEventListener('scroll',function(){if(tick)return;tick=true;requestAnimationFrame(function(){var y=scrollY;blobs.forEach(function(b){b.style.translate='0 '+(y*parseFloat(b.getAttribute('data-p')))+'px'});tick=false})},{passive:true});
+
+  route();
+})();
+</script>
