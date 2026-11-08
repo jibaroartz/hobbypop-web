@@ -86,6 +86,18 @@ for v in vendedores:
     escribir(f"vendedor/{v['s']}/index.html", pagina(f"{v['n']} · Vendedor de confianza | Hobby Pop", desc, ruta, f"vendedor-{v['s']}", indexar=not v.get("ejemplo")))
     if not v.get("ejemplo"): urls.append(ruta)
 
+SECCIONES = {
+    "tiendas": ("Tiendas de confianza", "Tiendas de cartas coleccionables en Panamá que la comunidad Hobby Pop conoce y recomienda."),
+    "vendedores": ("Vendedores de confianza", "Vendedores de tarjetas coleccionables que la comunidad Hobby Pop conoce y recomienda."),
+    "comunidad": ("Comunidad", "Los grupos de WhatsApp de Hobby Pop: deportes, TCG, entretenimiento, fans e intercambio y venta."),
+    "blog": ("Blog", "Guías para coleccionar, noticias del hobby e historias de la comunidad Hobby Pop."),
+    "contacto": ("Contacto", "Escríbenos por WhatsApp o Instagram, o pide aparecer como tienda o vendedor de confianza."),
+    "reglas": ("Reglas de la comunidad", "Las reglas generales de todos los grupos de la comunidad Hobby Pop."),
+}
+for k, (tt, dd) in SECCIONES.items():
+    escribir(f"{k}/index.html", pagina(f"{tt} | Hobby Pop", dd, f"/{k}/", k))
+    urls.append(f"/{k}/")
+
 for p in posts:
     ruta = f"/blog/{p['s']}/"
     texto = (RAIZ / "contenido" / "blog" / f"{p['s']}.html").read_text(encoding="utf-8")
