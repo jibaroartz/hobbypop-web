@@ -10,6 +10,7 @@ Lee data/*.json y src/body.html y escribe:
 Uso:  python3 scripts/generar.py
 """
 import json, pathlib, html, datetime, re
+from urllib.parse import quote
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 DOMINIO = "https://hobbypop.co"
@@ -52,7 +53,7 @@ def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True, og=None, entrada=""
 <link rel="icon" href="/assets/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;700;800;900&family=Sofia+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -113,12 +114,27 @@ for p in posts:
                 f'<span class="meta">{e(q["c"])} · {fecha_es(q["f"])} · {q["min"]} min</span><h3>{e(q["t"])}</h3>'
                 f'<p class="txt" style="font-size:20px">{e(q["r"])}</p></div></a>')
     relhtml = f'<div class="rel"><h2 class="h2">Sigue <span class="gt">leyendo</span></h2><div class="posts">{"".join(tarjeta(q) for q in rel)}</div></div>' if rel else ""
-    portada = ""
-    if p.get("img") and "<img" not in texto[:400]:
-        portada = f'<img class="art-cover" src="{e(p["img"])}" alt="{e(p["t"])}" width="1600" height="900">'
-    art = (f'<article class="art glass"><span class="meta">{e(p["c"])} · {fecha_es(p["f"])} · {p["min"]} min de lectura</span>'
-           f'<h1>{e(p["t"])}</h1>{portada}<div class="art-body">{texto}</div>'
-           f'<div class="row"><a class="btn" href="/#comunidad" data-join="comunidad">Unirme a la comunidad</a></div></article>{relhtml}')
+    # portada: la del post, o la primera imagen del texto (entradas importadas)
+    portada_src, portada_alt = p.get("img") or "", p["t"]
+    m = re.match(r"\s*<figure>\s*<img[^>]*?>\s*(?:<figcaption>.*?</figcaption>)?\s*</figure>", texto, re.S)
+    if m and not portada_src:
+        s = re.search(r'src="([^"]+)"', m.group(0))
+        if s: portada_src = s.group(1)
+    if m: texto = texto[m.end():]
+    texto = re.sub(r"^\s*(<hr/?>\s*)+", "", texto)
+    portada = (f'<figure class="pa-cover"><img src="{e(portada_src)}" alt="{e(portada_alt)}" width="1600" height="900"></figure>' if portada_src else "")
+    url_abs = f"{DOMINIO}{ruta}"
+    compartir = (f'<div class="pa-share"><span>Comparte esta entrada</span>'
+                 f'<a class="btn g sm" target="_blank" rel="noopener" href="https://wa.me/?text={quote(p["t"] + " " + url_abs)}">WhatsApp</a>'
+                 f'<button class="btn g sm" type="button" data-copy="{url_abs}">Copiar enlace</button></div>')
+    art = (f'<article class="pa">'
+           f'<header class="pa-head"><nav class="crumbs"><a href="/#blog" data-back>← Blog</a><span class="pill">{e(p["c"])}</span></nav>'
+           f'<h1>{e(p["t"])}</h1><p class="deck">{e(p["r"])}</p>'
+           f'<div class="byline"><span class="av"></span><div><b>Equipo Hobby Pop</b><span>{fecha_es(p["f"])} · {p["min"]} min de lectura</span></div></div></header>'
+           f'{portada}<div class="pa-body">{texto}</div>{compartir}'
+           f'<aside class="pa-cta glass"><h2 class="h2">Sé parte de <span class="gt">Hobby Pop</span></h2>'
+           f'<p class="txt">Únete a la comunidad de coleccionistas en español y elige los grupos que van contigo.</p>'
+           f'<div class="row"><a class="btn" href="/#comunidad" data-join="comunidad">Unirme a la comunidad</a></div></aside></article>{relhtml}')
     escribir(f"blog/{p['s']}/index.html", pagina(f"{p['t']} | Blog de Hobby Pop", p["r"], ruta, f"blog-{p['s']}", og=p.get("img") or None, entrada=art))
     urls.append(ruta)
 

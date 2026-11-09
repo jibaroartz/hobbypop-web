@@ -273,3 +273,15 @@
 
   route();
 })();
+/* barra de lectura y copiar enlace en entradas */
+(function(){
+  var bar=document.createElement('div');bar.className='readbar';document.body.appendChild(bar);
+  function upd(){var m=document.querySelector('main[data-page="entrada"]');
+    if(!m||m.hidden){bar.style.width='0';return}
+    var h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?Math.min(100,scrollY/h*100):0)+'%'}
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);addEventListener('hashchange',upd);upd();
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-copy]');if(!b)return;
+    var t=b.getAttribute('data-copy'),old=b.textContent;
+    function ok(){b.textContent='¡Enlace copiado!';setTimeout(function(){b.textContent=old},2000)}
+    try{navigator.clipboard.writeText(t).then(ok,function(){prompt('Copia el enlace:',t)})}catch(x){prompt('Copia el enlace:',t)}});
+})();
