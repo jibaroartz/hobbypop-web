@@ -17,6 +17,12 @@ DOMINIO = "https://hobbypop.co"
 cargar = lambda n: json.loads((RAIZ / "data" / n).read_text(encoding="utf-8"))
 grupos, tiendas, vendedores = cargar("grupos.json"), cargar("tiendas.json"), cargar("vendedores.json")
 cuerpo = (RAIZ / "src" / "body.html").read_text(encoding="utf-8")
+# Interruptores de secciones (data/config.json): false = oculta, sin borrar nada
+cfg = {"mostrar_tiendas": True, "mostrar_vendedores": True}
+if (RAIZ / "data" / "config.json").exists(): cfg.update(cargar("config.json"))
+MT, MV = cfg["mostrar_tiendas"], cfg["mostrar_vendedores"]
+cuerpo = (cuerpo.replace("%%H_T%%", "" if MT else " hidden").replace("%%H_V%%", "" if MV else " hidden")
+                .replace("%%H_D%%", "" if (MT or MV) else " hidden"))
 
 # Entradas del blog: solo las que ya llegaron a su fecha de publicacion (hora de Panama)
 import os
@@ -26,7 +32,7 @@ posts = [p for p in posts_todos if p["publicar"] <= hoy]
 MESES = "enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre".split()
 fecha_es = lambda f: f"{int(f[8:])} de {MESES[int(f[5:7])-1]} de {f[:4]}"
 
-DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts}, ensure_ascii=False).replace("</", "<\\/")
+DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts, "config": {"tiendas": MT, "vendedores": MV}}, ensure_ascii=False).replace("</", "<\\/")
 e = html.escape
 
 def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True, og=None, entrada=""):
@@ -72,16 +78,16 @@ def escribir(rel, contenido):
 urls = ["/"]
 escribir("index.html", pagina(
     "Hobby Pop · Comunidad de coleccionistas de tarjetas",
-    "La comunidad hispana de coleccionistas de tarjetas. Tiendas y vendedores de confianza, grupos de WhatsApp, blog y herramientas para aprender el hobby.",
+    "La comunidad hispana de coleccionistas de tarjetas. " + ("Tiendas y vendedores de confianza, " if (MT or MV) else "") + "grupos de WhatsApp, blog y herramientas para aprender el hobby.",
     "/"))
 
-for t in tiendas:
+for t in (tiendas if MT else []):
     ruta = f"/tienda/{t['s']}/"
     desc = f"{t['n']} en {t['z']}. Tienda de confianza de la comunidad Hobby Pop: horario, ubicación y qué manejan."
     escribir(f"tienda/{t['s']}/index.html", pagina(f"{t['n']} · Tienda de confianza | Hobby Pop", desc, ruta, f"tienda-{t['s']}", indexar=not t.get("ejemplo")))
     if not t.get("ejemplo"): urls.append(ruta)
 
-for v in vendedores:
+for v in (vendedores if MV else []):
     ruta = f"/vendedor/{v['s']}/"
     desc = f"{v['n']} en {v['z']}. Vendedor de confianza de la comunidad Hobby Pop. {v.get('d','')}".strip()
     escribir(f"vendedor/{v['s']}/index.html", pagina(f"{v['n']} · Vendedor de confianza | Hobby Pop", desc, ruta, f"vendedor-{v['s']}", indexar=not v.get("ejemplo")))
@@ -95,7 +101,11 @@ SECCIONES = {
     "contacto": ("Contacto", "Escríbenos por WhatsApp o Instagram, o pide aparecer como tienda o vendedor de confianza."),
     "reglas": ("Reglas de la comunidad", "Las reglas generales de todos los grupos de la comunidad Hobby Pop."),
 }
+import shutil
+for _d, _on in (("tienda", MT), ("tiendas", MT), ("vendedor", MV), ("vendedores", MV)):
+    if not _on and (RAIZ / _d).exists(): shutil.rmtree(RAIZ / _d)
 for k, (tt, dd) in SECCIONES.items():
+    if (k == "tiendas" and not MT) or (k == "vendedores" and not MV): continue
     escribir(f"{k}/index.html", pagina(f"{tt} | Hobby Pop", dd, f"/{k}/", k))
     urls.append(f"/{k}/")
 
