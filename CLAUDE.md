@@ -39,3 +39,8 @@ Hobby Bot, feed de eBay, vitrina privada, tiendas destacadas de pago, panel de a
 - Enlaces y botones de WhatsApp funcionan.
 - Vista previa al compartir (Open Graph) correcta.
 - Commit claro y push a `main`.
+
+## Campos de data/ (tiendas y vendedores)
+- Tienda: `s` (slug), `n`, `b` (barrio), `z` (zona), `t` (tipos), `h` (horario), `ig`, `v` (verificada), `logo` (ruta WebP), `fotos` (máx. 3 rutas WebP), `d` (descripción). Sin banner/portada. `ejemplo: true` solo en datos de muestra.
+- Vendedor: `s`, `n`, `z`, `do` (Vende/Cambia), `c` (categorías), `d`, `ig`, `wa` (número con código de país, sin +), `a` (tiempo en la comunidad), `logo` (foto de perfil), `fotos` (máx. 3 tarjetas), `refs` (lista de `{n, t}`: nombre y texto corto, sacados de capturas que envía Jibaro).
+- Quitar `ejemplo: true` al cargar datos reales; los perfiles de ejemplo se ocultan de Google (noindex).

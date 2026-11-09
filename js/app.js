@@ -10,6 +10,9 @@
   var USER='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>';
   function $(s,r){return (r||document).querySelector(s)}
   function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+  function igURL(s){return s.ejemplo?'https://www.instagram.com/':'https://www.instagram.com/'+String(s.ig).replace(/^@/,'').replace(/^https?:\/\/(www\.)?instagram\.com\//,'').replace(/\/$/,'')+'/'}
+  function waURL(s){return s.wa?'https://wa.me/'+String(s.wa).replace(/\D/g,''):''}
+  function slotHTML(s,cls,icon,txt,lbl){return s.logo?'<div class="slot has '+cls+'"><img src="'+s.logo+'" alt="'+lbl+'" loading="lazy"></div>':'<div class="slot '+cls+'" aria-label="'+lbl+'">'+icon+txt+'</div>'}
   var toastT;
   function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show')},2600)}
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -77,7 +80,7 @@
   function storeCard(s,i){
     var q=encodeURIComponent('tienda de cartas coleccionables Panamá'),c='c'+(i%3+1);
     return '<article class="card glass hov" data-i="'+i+'" id="st-'+i+'">'+
-      '<div class="cbody"><div class="nm"><div class="slot" aria-label="Aquí va el logo de la tienda">'+IMG+'Logo</div>'+(s.ejemplo?'<span class="tag p">Ejemplo</span>':'')+(s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+'</div>'+
+      '<div class="cbody"><div class="nm">'+slotHTML(s,'',IMG,'Logo','Logo de '+s.n)+(s.ejemplo?'<span class="tag p">Ejemplo</span>':'')+(s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+'</div>'+
       '<div><h3>'+s.n+'</h3><p class="sub">'+s.b+' · '+s.z+'</p></div>'+
       '<div class="chips">'+s.t.map(function(t){return '<span class="chip st">'+t+'</span>'}).join('')+'</div>'+
       '<div class="datos"><div><b>Horario</b><span>'+s.h+'</span></div><div><b>Redes</b><span>'+s.ig+'</span></div></div>'+
@@ -113,17 +116,17 @@
   /* Vendedores */
   function sellerCard(s){
     return '<article class="card glass hov" data-c="'+s.c.join('|')+'" data-s="'+s.s+'"><div class="sbody">'+
-      '<div class="sttop"><div class="slot round" aria-label="Aquí va la foto de perfil">'+USER+'Foto</div><div><h3>'+s.n+'</h3><p class="sub">'+s.z+' · Ejemplo</p></div></div>'+
+      '<div class="sttop">'+slotHTML(s,'round',USER,'Foto','Foto de '+s.n)+'<div><h3>'+s.n+'</h3><p class="sub">'+s.z+' · Ejemplo</p></div></div>'+
       '<div class="chips">'+s.do.map(function(d){return '<span class="tag p">'+d+'</span>'}).join('')+s.c.map(function(c){return '<span class="chip st">'+c+'</span>'}).join('')+'</div>'+
       '<p class="txt" style="font-size:20px">'+s.d+'</p>'+
       '<div class="caps"><div class="cap"><span class="etq">Referencias</span><b class="gt">'+s.r+'</b></div><div class="cap"><span class="etq">En la comunidad</span><b class="gt" style="font-size:32px;padding-top:7px">'+s.a+'</b></div></div>'+
-      '<div class="row"><a class="btn sm" href="/vendedor/'+s.s+'/">Ver perfil</a><a class="btn g sm" href="https://www.instagram.com/" target="_blank" rel="noopener">'+s.ig+'</a></div></div></article>';
+      '<div class="row"><a class="btn sm" href="/vendedor/'+s.s+'/">Ver perfil</a><a class="btn g sm" href="'+igURL(s)+'" target="_blank" rel="noopener">'+s.ig+'</a></div></div></article>';
   }
   function renderTienda(s){
     var url=location.origin+'/tienda/'+s.s+'/',q=encodeURIComponent('tienda de cartas coleccionables Panamá'),i=STORES.indexOf(s);
-    var fotos='';for(var k=0;k<3;k++)fotos+='<div class="shot">Foto del local</div>';
+    var fotos='';for(var k=0;k<3;k++)fotos+=(s.fotos&&s.fotos[k])?'<div class="shot has"><img src="'+s.fotos[k]+'" alt="Foto del local de '+s.n+'" loading="lazy"></div>':'<div class="shot">Foto del local</div>';
     $('#tienda-box').innerHTML='<article class="tp glass"><div class="tp-body">'+
-      '<div class="stack" style="gap:18px"><div class="slot" aria-label="Aquí va el logo de la tienda">'+IMG+'Logo</div>'+
+      '<div class="stack" style="gap:18px">'+slotHTML(s,'',IMG,'Logo','Logo de '+s.n)+
       (s.ejemplo?'<span class="tag p">Perfil de ejemplo</span>':'')+(s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+
       '<h1 class="h1" style="font-size:clamp(40px,9vw,76px)">'+s.n+'</h1><p class="sub">'+s.b+' · '+s.z+'</p>'+
       '<div class="glass box" style="gap:10px"><h3 class="h3">Qué manejan</h3><div class="chips">'+s.t.map(function(t){return '<span class="chip st">'+t+'</span>'}).join('')+'</div><p class="txt">Aquí va la descripción de la tienda: qué venden, qué eventos hacen y lo que quieran contar.</p></div>'+
@@ -139,14 +142,18 @@
   }
   function renderPerfil(s){
     var url=location.origin+'/vendedor/'+s.s+'/';
-    var shots='';for(var k=0;k<6;k++)shots+='<div class="shot">Captura de ejemplo</div>';
+    var shots='';for(var k=0;k<3;k++)shots+=(s.fotos&&s.fotos[k])?'<div class="shot has"><img src="'+s.fotos[k]+'" alt="Tarjeta de '+s.n+'" loading="lazy"></div>':'<div class="shot">Foto de tarjeta</div>';
+    var refs=s.refs||[];var nref=refs.length?refs.length:s.r;
+    var refHTML=refs.length?refs.map(function(r){return '<figure class="refq"><blockquote>\u201c'+r.t+'\u201d</blockquote><figcaption>'+r.n+'</figcaption></figure>'}).join(''):'<p class="txt">Aún no hay referencias publicadas.</p>';
+    var wa=waURL(s);
     $('#perfil-box').innerHTML='<article class="pf glass"><div class="stack" style="gap:18px">'+
-      '<div class="pf-top"><div class="slot round" aria-label="Aquí va la foto de perfil">'+USER+'Foto</div><div class="stack" style="gap:10px"><span class="tag p ver">'+CHECK+'Lo conoce Hobby Pop</span><h1 class="h1" style="font-size:clamp(40px,9vw,76px)">'+s.n+'</h1><p class="sub">'+s.z+' · Perfil de ejemplo</p></div></div>'+
+      '<div class="pf-top">'+slotHTML(s,'round',USER,'Foto','Foto de '+s.n)+'<div class="stack" style="gap:10px"><span class="tag p ver">'+CHECK+'Lo conoce Hobby Pop</span>'+(s.ejemplo?'<span class="tag p">Perfil de ejemplo</span>':'')+'<h1 class="h1" style="font-size:clamp(40px,9vw,76px)">'+s.n+'</h1><p class="sub">'+s.z+'</p></div></div>'+
       '<div class="chips">'+s.do.map(function(d){return '<span class="tag p">'+d+'</span>'}).join('')+s.c.map(function(c){return '<span class="chip st">'+c+'</span>'}).join('')+'</div>'+
       '<p class="lead">'+s.d+'</p>'+
-      '<div class="caps"><div class="cap"><span class="etq">Referencias</span><b class="gt">'+s.r+'</b></div><div class="cap"><span class="etq">En la comunidad</span><b class="gt">'+s.a+'</b></div><div class="cap"><span class="etq">Zona</span><b class="gt" style="font-size:24px;padding-top:8px">'+s.z.split(' ')[0]+'</b></div></div>'+
-      '<div class="row"><a class="btn" href="https://www.instagram.com/" target="_blank" rel="noopener">'+s.ig+'</a></div></div>'+
-      '<div class="stack" style="gap:18px"><div class="glass box"><h3 class="h3">Referencias</h3><p class="txt">Capturas de personas que ya compraron, vendieron o cambiaron con '+s.n+'. Los nombres y las fotos de los demás están difuminados.</p><div class="shots">'+shots+'</div></div>'+
+      '<div class="caps"><div class="cap"><span class="etq">Referencias</span><b class="gt">'+nref+'</b></div><div class="cap"><span class="etq">En la comunidad</span><b class="gt">'+s.a+'</b></div><div class="cap"><span class="etq">Zona</span><b class="gt" style="font-size:24px;padding-top:8px">'+s.z.split(' ')[0]+'</b></div></div>'+
+      '<div class="row">'+(wa?'<a class="btn" href="'+wa+'" target="_blank" rel="noopener">WhatsApp</a>':'<span class="btn dis" aria-disabled="true">WhatsApp</span>')+'<a class="btn g" href="'+igURL(s)+'" target="_blank" rel="noopener">'+s.ig+'</a></div></div>'+
+      '<div class="stack" style="gap:18px"><div class="glass box"><h3 class="h3">Tarjetas que vende</h3><div class="shots">'+shots+'</div></div>'+
+      '<div class="glass box"><h3 class="h3">Referencias</h3><p class="txt">Lo que dicen personas que ya compraron, vendieron o cambiaron con '+s.n+'.</p><div class="refs">'+refHTML+'</div></div>'+
       '<div class="glass box"><h3 class="h3">Comparte este perfil</h3><p class="txt">Es tu enlace de confianza. Mándalo a quien quieras para que vea tus referencias.</p><div class="link" id="pf-link">'+url+'</div>'+
       '<div class="row"><button class="btn sm" type="button" id="pf-copy">Copiar enlace</button><a class="btn g sm" id="pf-wa" href="#" target="_blank" rel="noopener">Compartir por WhatsApp</a></div></div>'+
       '<p class="small">Hobby Pop conoce a esta persona hace tiempo, pero no interviene en sus compras, ventas ni cambios. Cada trato es un acuerdo entre las partes.</p></div></article>';
