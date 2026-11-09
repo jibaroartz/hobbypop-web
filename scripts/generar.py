@@ -113,8 +113,11 @@ for p in posts:
                 f'<span class="meta">{e(q["c"])} · {fecha_es(q["f"])} · {q["min"]} min</span><h3>{e(q["t"])}</h3>'
                 f'<p class="txt" style="font-size:20px">{e(q["r"])}</p></div></a>')
     relhtml = f'<div class="rel"><h2 class="h2">Sigue <span class="gt">leyendo</span></h2><div class="posts">{"".join(tarjeta(q) for q in rel)}</div></div>' if rel else ""
-    art = (f'<article class="art"><span class="meta">{e(p["c"])} · {fecha_es(p["f"])} · {p["min"]} min de lectura</span>'
-           f'<h1>{e(p["t"])}</h1><div class="art-body">{texto}</div>'
+    portada = ""
+    if p.get("img") and "<img" not in texto[:400]:
+        portada = f'<img class="art-cover" src="{e(p["img"])}" alt="{e(p["t"])}" width="1600" height="900">'
+    art = (f'<article class="art glass"><span class="meta">{e(p["c"])} · {fecha_es(p["f"])} · {p["min"]} min de lectura</span>'
+           f'<h1>{e(p["t"])}</h1>{portada}<div class="art-body">{texto}</div>'
            f'<div class="row"><a class="btn" href="/#comunidad" data-join="comunidad">Unirme a la comunidad</a></div></article>{relhtml}')
     escribir(f"blog/{p['s']}/index.html", pagina(f"{p['t']} | Blog de Hobby Pop", p["r"], ruta, f"blog-{p['s']}", og=p.get("img") or None, entrada=art))
     urls.append(ruta)
