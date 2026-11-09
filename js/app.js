@@ -55,6 +55,11 @@
   }
   $$('[data-copy-el]').forEach(function(b){b.addEventListener('click',function(){var n=document.getElementById(b.getAttribute('data-copy-el'));copy(n.textContent,'Plantilla copiada. Pégala en WhatsApp o Instagram.',n)})});
   /* WhatsApp: pon aquí el número de Hobby Pop con código de país, sin + ni espacios (ej. 507XXXXXXXX) */
+  /* Contacto: paneles "Soy tienda / Soy vendedor" */
+  $$('[data-open]').forEach(function(btn){btn.addEventListener('click',function(){
+    var id=btn.getAttribute('data-open'),open=btn.getAttribute('aria-expanded')!=='true';
+    $$('[data-open]').forEach(function(x){var on=x===btn&&open;x.setAttribute('aria-expanded',on?'true':'false');x.classList.toggle('on',on);document.getElementById(x.getAttribute('data-open')).hidden=!on});
+  })});
   var WA_NUM='50764437573';
   $$('[data-wa]').forEach(function(a){
     var id=a.getAttribute('data-wa'),n=id?document.getElementById(id):null;
@@ -194,6 +199,27 @@
     $('#vacio-blog').hidden=n>0;
   }
   $('#q-blog').addEventListener('input',function(){bq=this.value.trim().toLowerCase();applyB()});
+
+  /* Formulario de contacto.
+     FORM_ENDPOINT: si se llena (p. ej. https://formspree.io/f/XXXX), el mensaje llega al correo.
+     Mientras este vacio, se abre WhatsApp con el mensaje ya escrito. */
+  var FORM_ENDPOINT='';
+  $('#contact-form').addEventListener('submit',function(e){
+    e.preventDefault();var n=$('#cf-n'),m=$('#cf-m'),t=$('#cf-t'),out=$('#cf-msg');
+    if(!n.value.trim()){out.textContent='Escribe tu nombre.';n.focus();return}
+    if(!m.value||m.value.indexOf('@')<1||m.value.indexOf('.')<0){out.textContent='Revisa tu correo. Debe tener el formato nombre@correo.com.';m.focus();return}
+    if(!t.value.trim()){out.textContent='Escribe tu mensaje.';t.focus();return}
+    if(FORM_ENDPOINT){
+      out.textContent='Enviando...';
+      fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({nombre:n.value.trim(),correo:m.value.trim(),mensaje:t.value.trim()})})
+        .then(function(r){if(!r.ok)throw 0;out.textContent='Listo, recibimos tu mensaje. Te respondemos pronto.';e.target.reset()})
+        .catch(function(){out.textContent='No pudimos enviarlo. Inténtalo otra vez o escríbenos por WhatsApp.'});
+    }else{
+      var txt='Hola, soy '+n.value.trim()+' ('+m.value.trim()+').\n'+t.value.trim();
+      window.open('https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(txt),'_blank','noopener');
+      out.textContent='Se abrió WhatsApp con tu mensaje. Solo falta darle enviar.';
+    }
+  });
 
   /* Newsletter (demo) */
   $('#nl-form').addEventListener('submit',function(e){

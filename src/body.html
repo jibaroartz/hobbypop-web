@@ -288,14 +288,18 @@
 <main data-page="contacto" hidden>
   <section class="sec ph"><div class="in stack">
     <h1 class="h1">Hablemos <span class="gt">de hobby</span></h1>
-    <p class="lead">Escríbenos por WhatsApp o Instagram. Si quieres aparecer en la página, copia la plantilla, complétala y mándala.</p>
-    <div class="row">
-      <a class="btn" href="/#contacto" data-wa=""><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Escríbenos por WhatsApp</a>
-      <span class="chip st" style="font-size:18px;padding:10px 16px 8px">+507 6443-7573</span>
-      <a class="btn g" href="https://www.instagram.com/hobbypop7/" target="_blank" rel="noopener">Instagram @hobbypop7</a>
-    </div>
-    <div class="three">
-      <div class="box glass"><h3 class="h3">Quiero que mi tienda aparezca</h3><p class="txt">Revisamos la solicitud y confirmamos la dirección antes de publicar.</p>
+    <p class="lead">Escríbenos por WhatsApp o déjanos un mensaje en el formulario.</p>
+    <div class="row"><a class="btn" href="/#contacto" data-wa=""><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Escríbenos por WhatsApp</a></div>
+
+    <div class="glass box apar">
+      <h2 class="h3">¿Quieres aparecer en la página?</h2>
+      <p class="txt">Elige cómo quieres aparecer y te mostramos el mensaje listo para enviar.</p>
+      <div class="row">
+        <button class="btn g" type="button" data-open="ap-tienda" aria-expanded="false" aria-controls="ap-tienda">Soy tienda</button>
+        <button class="btn g" type="button" data-open="ap-vend" aria-expanded="false" aria-controls="ap-vend">Soy vendedor</button>
+      </div>
+      <div class="ap-panel" id="ap-tienda" hidden>
+        <p class="txt">Revisamos la solicitud y confirmamos la dirección antes de publicar.</p>
         <pre class="tpl" id="tpl-tienda">Hola, quiero que mi tienda aparezca en el directorio de Hobby Pop.
 Nombre de la tienda:
 Zona y dirección:
@@ -303,8 +307,10 @@ Horario:
 Tipo (TCG, deportivas, entretenimiento):
 Instagram o WhatsApp:
 Logo (lo envío como imagen):</pre>
-        <div class="row"><a class="btn sm" href="/#contacto" data-wa="tpl-tienda"><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Soy tienda, quiero aparecer</a><button class="btn g sm" type="button" data-copy-el="tpl-tienda">Copiar</button></div></div>
-      <div class="box glass"><h3 class="h3">Quiero aparecer como vendedor</h3><p class="txt">Solo incluimos a personas que conocemos hace tiempo. Tú recoges tus referencias y nos mandas las capturas.</p>
+        <div class="row"><a class="btn sm" href="/#contacto" data-wa="tpl-tienda"><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Enviar por WhatsApp</a><button class="btn g sm" type="button" data-copy-el="tpl-tienda">Copiar</button></div>
+      </div>
+      <div class="ap-panel" id="ap-vend" hidden>
+        <p class="txt">Solo incluimos a personas que conocemos hace tiempo. Tú recoges tus referencias y nos mandas las capturas.</p>
         <pre class="tpl" id="tpl-vend">Hola, quiero aparecer en Vendedores que Hobby Pop conoce.
 Apodo:
 Zona:
@@ -313,8 +319,22 @@ Instagram:
 Desde cuándo estoy en la comunidad:
 Quién me conoce en los grupos:
 Foto de perfil (la envío como imagen):</pre>
-        <div class="row"><a class="btn sm" href="/#contacto" data-wa="tpl-vend"><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Soy vendedor, quiero aparecer</a><button class="btn g sm" type="button" data-copy-el="tpl-vend">Copiar</button></div></div>
+        <div class="row"><a class="btn sm" href="/#contacto" data-wa="tpl-vend"><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 012 2v9a2 2 0 01-2 2H11l-5 4v-4H4a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg>Enviar por WhatsApp</a><button class="btn g sm" type="button" data-copy-el="tpl-vend">Copiar</button></div>
+      </div>
     </div>
+
+    <form class="glass box cform" id="contact-form" novalidate>
+      <h2 class="h3">O escríbenos un mensaje</h2>
+      <p class="txt">Para dudas, ideas o cualquier cosa que quieras contarnos.</p>
+      <label class="etq" for="cf-n">Nombre</label>
+      <input class="field" id="cf-n" name="nombre" type="text" autocomplete="name" required>
+      <label class="etq" for="cf-m">Correo</label>
+      <input class="field" id="cf-m" name="correo" type="email" inputmode="email" autocomplete="email" required>
+      <label class="etq" for="cf-t">Mensaje</label>
+      <textarea class="field" id="cf-t" name="mensaje" rows="5" required></textarea>
+      <button class="btn" type="submit" style="align-self:flex-start">Enviar mensaje</button>
+      <p class="nl-msg" id="cf-msg" role="status"></p>
+    </form>
   </div></section>
 </main>
 
