@@ -424,17 +424,17 @@ textarea.field{min-height:130px;resize:vertical;border-radius:24px}
 .crumbs a:hover{opacity:1;color:var(--am)}
 .pill{font-weight:900;text-transform:uppercase;letter-spacing:.08em;font-size:14px;padding:6px 12px 4px;border-radius:999px;background:rgba(255,196,0,.14);color:var(--am);border:1px solid rgba(255,196,0,.45)}
 .pa h1{margin:0;font-weight:900;text-transform:uppercase;font-size:clamp(40px,7.4vw,78px);line-height:.92;letter-spacing:.005em;text-wrap:balance;overflow-wrap:normal}
-.deck{margin:0;font-family:'Sofia Sans',Arial,sans-serif;font-weight:500;font-size:clamp(20px,2.6vw,25px);line-height:1.45;opacity:.82;text-wrap:pretty}
+.deck{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-weight:400;font-size:clamp(18px,2.2vw,22px);line-height:1.6;opacity:.8;text-wrap:pretty}
 .byline{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)}
 .byline .av{width:44px;height:44px;border-radius:50%;flex:0 0 auto;background:var(--noche) url(/assets/logo-p.webp) center/70% no-repeat;border:1px solid var(--line)}
 .byline div{display:flex;flex-direction:column;line-height:1.15}
 .byline b{font-weight:900;font-size:19px;text-transform:uppercase;letter-spacing:.04em}
-.byline span:not(.av){font-family:'Sofia Sans',Arial,sans-serif;font-weight:500;font-size:16px;opacity:.7}
+.byline span:not(.av){font-family:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-weight:500;font-size:16px;opacity:.7}
 .pa-cover{margin:0;max-width:1000px;border-radius:clamp(16px,2.4vw,26px);overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -20px rgba(0,0,0,.6);background:var(--uva)}
 .pa-cover img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;max-height:520px}
-.pa-body{font-family:'Sofia Sans',Arial,sans-serif;font-weight:400;font-size:clamp(19px,2.2vw,21px);line-height:1.72;color:rgba(243,239,250,.9);display:flex;flex-direction:column;gap:1.25em;min-width:0}
+.pa-body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-weight:400;font-size:clamp(17px,2vw,19px);line-height:1.8;color:rgba(243,239,250,.86);display:flex;flex-direction:column;gap:1.25em;min-width:0}
 .pa-body p,.pa-body li{margin:0;text-wrap:pretty;overflow-wrap:break-word}
-.pa-body>p:first-child{font-size:1.14em;line-height:1.6;color:var(--hueso);font-weight:500}
+.pa-body>p:first-child{font-size:1.12em;line-height:1.7;color:var(--hueso);font-weight:500}
 .pa-body strong,.pa-body b{font-weight:700;color:var(--hueso)}
 .pa-body a{color:var(--am);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
 .pa-body a:hover{color:#fff}
@@ -463,3 +463,12 @@ textarea.field{min-height:130px;resize:vertical;border-radius:24px}
 .pa-cta .h2{margin:0}
 .rel{margin-top:clamp(24px,5vw,56px)}
 .readbar{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--am),var(--pop));z-index:90;pointer-events:none}
+
+/* Fondo negro en las entradas */
+body:has(main[data-page="entrada"]:not([hidden])){background:#0a0a0a}
+body:has(main[data-page="entrada"]:not([hidden]))::before{background:#0a0a0a}
+body:has(main[data-page="entrada"]:not([hidden])) .bg{background:#0a0a0a}
+body:has(main[data-page="entrada"]:not([hidden])) .blob{display:none}
+.pa-cover{background:#141414;box-shadow:0 24px 60px -24px rgba(0,0,0,.9)}
+.pa-cta{background:#141414;border:1px solid rgba(255,255,255,.1)}
+.pa-body blockquote{border-left-color:var(--am)}
