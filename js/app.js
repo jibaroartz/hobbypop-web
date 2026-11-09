@@ -2,7 +2,7 @@
   var D=window.DATA;
   /* Datos de ejemplo. Reemplázalos con los reales. */
   var LINKS=D.grupos;
-  var NOMBRES={comunidad:'la comunidad',sports:'Hobby Sports',tcg:'Hobby TCG',ent:'Hobby Entertainment',fans:'Zona Fans',venta:'Intercambio y Venta',avisos:'Avisos'};
+  var NOMBRES={comunidad:'la comunidad',house:'Hobby House',tcg:'Hobby TCG',fans:'Zona Fans',breaks:'Hobby Breaks',venta:'Venta',intercambio:'Intercambio y Búsqueda',avisos:'Avisos'};
   var STORES=D.tiendas;
   var SELLERS=D.vendedores;
   var CHECK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -41,7 +41,7 @@
   /* Enlaces */
   $$('[data-join]').forEach(function(a){
     var k=a.getAttribute('data-join');
-    if(LINKS[k]){a.href=LINKS[k];a.target='_blank';a.rel='noopener'}
+    if(LINKS[k]){a.href=LINKS[k];a.target='_blank';a.rel='noopener'}else if(k!=='comunidad'){a.hidden=true}
     else a.addEventListener('click',function(e){e.preventDefault();toast('Aquí irá el enlace de invitación a '+NOMBRES[k])});
   });
   var YT='https://www.youtube.com/@jibarocards';
