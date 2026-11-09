@@ -230,10 +230,11 @@
 
   /* Slider con barras de progreso */
   var slides=$$('.slide'),segs=[],cur=0,prog=$('#sl-prog'),sl=$('#slider');
+  if(slides.length<2){prog.hidden=true;$('.sl-nav').hidden=true}
   slides.forEach(function(s,i){
     var b=document.createElement('button');b.type='button';b.className='seg';b.setAttribute('aria-label','Ir a la diapositiva '+(i+1));b.innerHTML='<i></i>';
     b.addEventListener('click',function(){go(i)});prog.appendChild(b);segs.push(b);
-    if(!reduce)b.firstChild.addEventListener('animationend',function(){if(b.classList.contains('on'))go(cur+1)});
+    if(!reduce&&slides.length>1)b.firstChild.addEventListener('animationend',function(){if(b.classList.contains('on'))go(cur+1)});
   });
   function go(i){
     cur=(i+slides.length)%slides.length;
