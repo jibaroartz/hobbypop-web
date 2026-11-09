@@ -29,7 +29,7 @@ Comunidad de coleccionistas de tarjetas en español (fuerte en Panamá). Sitio e
 - Imágenes en WebP, máx. 1600px y ~150 KB.
 - Mapa: Leaflet + OpenStreetMap, con lat/lng sacados de los enlaces de Google Maps.
 - Boletín: formulario embebido de Mailchimp; hace falta página de Privacidad.
-- Enlaces de grupos WhatsApp, YouTube (@jibarocards) e Instagram (@hobbypop7) están en el prototipo; mantenerlos iguales.
+- Enlaces de grupos WhatsApp, YouTube (@jibarocards) e Instagram (@hobbypop.co, antes @hobbypop7) están en el prototipo; mantenerlos iguales.
 
 ## Fuera de la fase 1
 Hobby Bot, feed de eBay, vitrina privada, tiendas destacadas de pago, panel de administración.
