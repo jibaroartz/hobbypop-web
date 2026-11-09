@@ -102,10 +102,20 @@ for p in posts:
     ruta = f"/blog/{p['s']}/"
     texto = (RAIZ / "contenido" / "blog" / f"{p['s']}.html").read_text(encoding="utf-8")
     texto = re.sub(r"^(<hr/?>)+", "", texto)
-    orig = f'<p class="art-orig">Publicado originalmente en <a href="{e(p["medium"])}" target="_blank" rel="noopener">Medium</a>.</p>' if p.get("medium") else ""
+    # recomendadas: primero de la misma categoria, luego las mas recientes
+    orden = sorted(posts, key=lambda q: (q["publicar"], q["f"]), reverse=True)
+    otros = [q for q in orden if q["s"] != p["s"]]
+    rel = ([q for q in otros if q["c"] == p["c"]] + [q for q in otros if q["c"] != p["c"]])[:3]
+    def tarjeta(q):
+        st = f" style=\"background-image:url('{e(q['img'])}')\"" if q.get("img") else ""
+        cls = "n" if q["c"] == "Noticia" else ("v" if q["c"] == "Historia" else "")
+        return (f'<a class="post glass hov" href="/blog/{q["s"]}/"><div class="thumb has {cls}"{st}></div><div class="pbody">'
+                f'<span class="meta">{e(q["c"])} · {fecha_es(q["f"])} · {q["min"]} min</span><h3>{e(q["t"])}</h3>'
+                f'<p class="txt" style="font-size:20px">{e(q["r"])}</p></div></a>')
+    relhtml = f'<div class="rel"><h2 class="h2">Sigue <span class="gt">leyendo</span></h2><div class="posts">{"".join(tarjeta(q) for q in rel)}</div></div>' if rel else ""
     art = (f'<article class="art"><span class="meta">{e(p["c"])} · {fecha_es(p["f"])} · {p["min"]} min de lectura</span>'
-           f'<h1>{e(p["t"])}</h1><div class="art-body">{texto}</div>{orig}'
-           f'<div class="row"><a class="btn" href="/#comunidad" data-join="comunidad">Unirme a la comunidad</a><a class="btn g" href="/#blog">Más entradas</a></div></article>')
+           f'<h1>{e(p["t"])}</h1><div class="art-body">{texto}</div>'
+           f'<div class="row"><a class="btn" href="/#comunidad" data-join="comunidad">Unirme a la comunidad</a></div></article>{relhtml}')
     escribir(f"blog/{p['s']}/index.html", pagina(f"{p['t']} | Blog de Hobby Pop", p["r"], ruta, f"blog-{p['s']}", og=p.get("img") or None, entrada=art))
     urls.append(ruta)
 
