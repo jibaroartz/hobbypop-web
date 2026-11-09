@@ -77,8 +77,7 @@
   function storeCard(s,i){
     var q=encodeURIComponent('tienda de cartas coleccionables Panamá'),c='c'+(i%3+1);
     return '<article class="card glass hov" data-i="'+i+'" id="st-'+i+'">'+
-      '<div class="cover '+c+'">'+(s.ejemplo?'<span class="ctag">Ejemplo</span>':'')+'</div>'+
-      '<div class="cbody"><div class="nm"><div class="slot" aria-label="Aquí va el logo de la tienda">'+IMG+'Logo</div>'+(s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+'</div>'+
+      '<div class="cbody"><div class="nm"><div class="slot" aria-label="Aquí va el logo de la tienda">'+IMG+'Logo</div>'+(s.ejemplo?'<span class="tag p">Ejemplo</span>':'')+(s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+'</div>'+
       '<div><h3>'+s.n+'</h3><p class="sub">'+s.b+' · '+s.z+'</p></div>'+
       '<div class="chips">'+s.t.map(function(t){return '<span class="chip st">'+t+'</span>'}).join('')+'</div>'+
       '<div class="datos"><div><b>Horario</b><span>'+s.h+'</span></div><div><b>Redes</b><span>'+s.ig+'</span></div></div>'+
@@ -122,10 +121,10 @@
   }
   function renderTienda(s){
     var url=location.origin+'/tienda/'+s.s+'/',q=encodeURIComponent('tienda de cartas coleccionables Panamá'),i=STORES.indexOf(s);
-    var fotos='';for(var k=0;k<6;k++)fotos+='<div class="shot">Foto del local</div>';
-    $('#tienda-box').innerHTML='<article class="tp glass"><div class="cover c'+(i%3+1)+'">'+(s.ejemplo?'<span class="ctag">Perfil de ejemplo</span>':'')+'</div><div class="tp-body">'+
+    var fotos='';for(var k=0;k<3;k++)fotos+='<div class="shot">Foto del local</div>';
+    $('#tienda-box').innerHTML='<article class="tp glass"><div class="tp-body">'+
       '<div class="stack" style="gap:18px"><div class="slot" aria-label="Aquí va el logo de la tienda">'+IMG+'Logo</div>'+
-      (s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+
+      (s.ejemplo?'<span class="tag p">Perfil de ejemplo</span>':'')+(s.v?'<span class="tag p ver">'+CHECK+'Verificada</span>':'')+
       '<h1 class="h1" style="font-size:clamp(40px,9vw,76px)">'+s.n+'</h1><p class="sub">'+s.b+' · '+s.z+'</p>'+
       '<div class="glass box" style="gap:10px"><h3 class="h3">Qué manejan</h3><div class="chips">'+s.t.map(function(t){return '<span class="chip st">'+t+'</span>'}).join('')+'</div><p class="txt">Aquí va la descripción de la tienda: qué venden, qué eventos hacen y lo que quieran contar.</p></div>'+
       '<div class="glass box" style="gap:10px"><h3 class="h3">Visítalos</h3><div class="datos"><div><b>Horario</b><span>'+s.h+'</span></div><div><b>Redes</b><span>'+s.ig+'</span></div><div><b>Zona</b><span>'+s.b+', '+s.z+'</span></div></div>'+
