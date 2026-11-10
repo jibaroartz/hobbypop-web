@@ -101,7 +101,7 @@ SECCIONES = {
     "vendedores": ("Vendedores de confianza", "Vendedores de tarjetas coleccionables que la comunidad Hobby Pop conoce y recomienda."),
     "comunidad": ("Comunidad", "Los grupos de WhatsApp de Hobby Pop: deportes, TCG, entretenimiento, fans e intercambio y venta."),
     "blog": ("Blog", "Guías para coleccionar, noticias del hobby e historias de la comunidad Hobby Pop."),
-    "venta": ("Venta masiva", "Venta masiva de tarjetas de Panamá a precios bajos. Arma tu carrito, envía la lista por WhatsApp y paga por Yappy."),
+    "venta": ("Colección Panameña · Venta", "Selección de tarjetas de alto nivel de Panamá, piezas que no se ven a la venta todos los días. Arma tu carrito, envía la lista por WhatsApp y paga por Yappy."),
     "contacto": ("Contacto", "Escríbenos por WhatsApp o Instagram, o pide aparecer como tienda o vendedor de confianza."),
     "reglas": ("Reglas de la comunidad", "Las reglas generales de todos los grupos de la comunidad Hobby Pop."),
 }

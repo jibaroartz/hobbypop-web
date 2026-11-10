@@ -33,7 +33,7 @@ function renderDrawer(){var l=$('li');
  $('cp').disabled=!cart.length;$('clr').disabled=!cart.length;
  $('wa').classList.toggle('dis',!cart.length);$('wa').setAttribute('href','https://wa.me/'+WA+'?text='+encodeURIComponent(listText()))}
 function listText(){var n=($('nm')&&$('nm').value||'').trim(),nt=($('nt')&&$('nt').value||'').trim();
- var L=['Pedido Venta Hobby Pop'+(n?' · '+n:''),''];
+ var L=['Pedido · Colección Panameña (Hobby Pop)'+(n?' · '+n:''),''];
  cart.forEach(function(id,i){var d=D[id];L.push((i+1)+'. '+d.n+' — '+d.d+' ('+d.c+') — '+usd(d.p))});
  L.push('','Total: '+usd(total())+' ('+cnt()+')');if(nt)L.push('','Nota: '+nt);return L.join('\n')}
 var q='',catf='all';
