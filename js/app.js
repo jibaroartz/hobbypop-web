@@ -18,7 +18,9 @@
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   /* Rutas */
-  var PAGES=['inicio','tiendas','vendedores','comunidad','blog','contacto','reglas'];
+  var PAGES=['inicio','tiendas','vendedores','comunidad','blog','venta','contacto','reglas'];
+  var ventaOn=false;
+  function loadVenta(){if(ventaOn)return;ventaOn=true;var sc=document.createElement('script');sc.src='/venta/venta.js?v='+(D.ventav||'');sc.onload=function(){if(window.hpVenta)window.hpVenta($('#venta-host'))};sc.onerror=function(){ventaOn=false;var h=$('#venta-host');if(h)h.innerHTML='<p class="small">No se pudo cargar la venta. Recarga la página.</p>'};document.head.appendChild(sc)}
   function closeMenu(){$('#hdr').classList.remove('open');$('#menu-btn').setAttribute('aria-expanded','false')}
   function findStore(h){for(var k=0;k<STORES.length;k++)if('tienda-'+STORES[k].s===h)return STORES[k];return null}
   function findSeller(h){for(var k=0;k<SELLERS.length;k++)if('vendedor-'+SELLERS[k].s===h)return SELLERS[k];return null}
@@ -35,6 +37,7 @@
     else if(PAGES.indexOf(h)<0)page=nav='inicio';
     $$('[data-page]').forEach(function(p){p.hidden=p.getAttribute('data-page')!==page});
     $$('[data-nav]').forEach(function(a){var on=a.getAttribute('data-nav')===nav;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    if(page==='venta')loadVenta();
     closeMenu();window.scrollTo(0,0);setTimeout(reveal,60);
   }
   var navs=0;

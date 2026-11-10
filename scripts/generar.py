@@ -32,7 +32,10 @@ posts = [p for p in posts_todos if p["publicar"] <= hoy]
 MESES = "enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre".split()
 fecha_es = lambda f: f"{int(f[8:])} de {MESES[int(f[5:7])-1]} de {f[:4]}"
 
-DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts, "config": {"tiendas": MT, "vendedores": MV}}, ensure_ascii=False).replace("</", "<\\/")
+import hashlib
+_vj = RAIZ / "venta" / "venta.js"
+VENTAV = hashlib.md5(_vj.read_bytes()).hexdigest()[:8] if _vj.exists() else ""
+DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts, "config": {"tiendas": MT, "vendedores": MV}, "ventav": VENTAV}, ensure_ascii=False).replace("</", "<\\/")
 e = html.escape
 
 def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True, og=None, entrada=""):
@@ -98,6 +101,7 @@ SECCIONES = {
     "vendedores": ("Vendedores de confianza", "Vendedores de tarjetas coleccionables que la comunidad Hobby Pop conoce y recomienda."),
     "comunidad": ("Comunidad", "Los grupos de WhatsApp de Hobby Pop: deportes, TCG, entretenimiento, fans e intercambio y venta."),
     "blog": ("Blog", "Guías para coleccionar, noticias del hobby e historias de la comunidad Hobby Pop."),
+    "venta": ("Venta masiva", "Venta masiva de tarjetas de Panamá a precios bajos. Arma tu carrito, envía la lista por WhatsApp y paga por Yappy."),
     "contacto": ("Contacto", "Escríbenos por WhatsApp o Instagram, o pide aparecer como tienda o vendedor de confianza."),
     "reglas": ("Reglas de la comunidad", "Las reglas generales de todos los grupos de la comunidad Hobby Pop."),
 }
