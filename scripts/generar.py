@@ -151,5 +151,5 @@ for p in posts:
 escribir("404.html", pagina("Página no encontrada | Hobby Pop", "Esta página no existe. Vuelve al inicio de Hobby Pop.", "/404.html", "", indexar=False))
 escribir("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
          "".join(f"  <url><loc>{DOMINIO}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
-escribir("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {DOMINIO}/sitemap.xml\n")
+escribir("robots.txt", f"User-agent: *\nDisallow: /stackerz/\nAllow: /\nSitemap: {DOMINIO}/sitemap.xml\n")
 print(f"OK: {len(tiendas)} tiendas, {len(vendedores)} vendedores, {len(posts)}/{len(posts_todos)} entradas, {len(urls)} URLs en el sitemap")
