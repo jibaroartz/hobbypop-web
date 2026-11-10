@@ -1,4 +1,5 @@
 {
  "mostrar_tiendas": false,
- "mostrar_vendedores": false
+ "mostrar_vendedores": false,
+ "mostrar_venta": false
 }

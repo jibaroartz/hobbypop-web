@@ -30,6 +30,7 @@
     var CF=D.config||{};
     if(CF.tiendas===false&&(h==='tiendas'||h.indexOf('tienda-')===0))h='inicio';
     if(CF.vendedores===false&&(h==='vendedores'||h.indexOf('vendedor-')===0))h='inicio';
+    if(CF.venta===false&&h==='venta')h='inicio';
     page=nav=h;
     if(h.indexOf('tienda-')===0){var st=findStore(h);if(st){renderTienda(st);page='perfil-tienda';nav='tiendas'}else{page=nav='tiendas'}}
     else if(h.indexOf('vendedor-')===0){var s=findSeller(h);if(s){renderPerfil(s);page='perfil';nav='vendedores'}else{page=nav='vendedores'}}

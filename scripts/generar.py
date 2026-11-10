@@ -18,9 +18,11 @@ cargar = lambda n: json.loads((RAIZ / "data" / n).read_text(encoding="utf-8"))
 grupos, tiendas, vendedores = cargar("grupos.json"), cargar("tiendas.json"), cargar("vendedores.json")
 cuerpo = (RAIZ / "src" / "body.html").read_text(encoding="utf-8")
 # Interruptores de secciones (data/config.json): false = oculta, sin borrar nada
-cfg = {"mostrar_tiendas": True, "mostrar_vendedores": True}
+cfg = {"mostrar_tiendas": True, "mostrar_vendedores": True, "mostrar_venta": True}
 if (RAIZ / "data" / "config.json").exists(): cfg.update(cargar("config.json"))
 MT, MV = cfg["mostrar_tiendas"], cfg["mostrar_vendedores"]
+MVN = cfg["mostrar_venta"]
+cuerpo = cuerpo.replace("%%H_VN%%", "" if MVN else " hidden")
 cuerpo = (cuerpo.replace("%%H_T%%", "" if MT else " hidden").replace("%%H_V%%", "" if MV else " hidden")
                 .replace("%%H_D%%", "" if (MT or MV) else " hidden"))
 
@@ -35,7 +37,7 @@ fecha_es = lambda f: f"{int(f[8:])} de {MESES[int(f[5:7])-1]} de {f[:4]}"
 import hashlib
 _vj = RAIZ / "venta" / "venta.js"
 VENTAV = hashlib.md5(_vj.read_bytes()).hexdigest()[:8] if _vj.exists() else ""
-DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts, "config": {"tiendas": MT, "vendedores": MV}, "ventav": VENTAV}, ensure_ascii=False).replace("</", "<\\/")
+DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts, "config": {"tiendas": MT, "vendedores": MV, "venta": MVN}, "ventav": VENTAV}, ensure_ascii=False).replace("</", "<\\/")
 e = html.escape
 
 def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True, og=None, entrada=""):
@@ -110,6 +112,9 @@ for _d, _on in (("tienda", MT), ("tiendas", MT), ("vendedor", MV), ("vendedores"
     if not _on and (RAIZ / _d).exists(): shutil.rmtree(RAIZ / _d)
 for k, (tt, dd) in SECCIONES.items():
     if (k == "tiendas" and not MT) or (k == "vendedores" and not MV): continue
+    if k == "venta" and not MVN:
+        (RAIZ / "venta" / "index.html").unlink(missing_ok=True)
+        continue
     escribir(f"{k}/index.html", pagina(f"{tt} | Hobby Pop", dd, f"/{k}/", k))
     urls.append(f"/{k}/")
 
