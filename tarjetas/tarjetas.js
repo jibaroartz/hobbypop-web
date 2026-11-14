@@ -125,6 +125,8 @@ h1{font-weight:900;text-transform:uppercase;font-size:clamp(54px,15vw,112px);lin
 .cpy{flex:none;height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--glass);display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800;text-transform:uppercase}
 .pay{display:flex;flex-direction:column;gap:6px;font-size:18px;line-height:1.15;color:var(--mut)}
 .pay b{color:var(--hueso);font-weight:900}
+.pick{font-size:18px;line-height:1.15;padding:10px 12px;border-radius:14px;border:1px solid rgba(79,224,255,.45);background:rgba(79,224,255,.1)}
+.pick b{font-weight:900;color:var(--cian)}
 .clr{align-self:center;min-height:44px;border:0;background:none;font-size:17px;text-transform:uppercase;letter-spacing:.05em;text-decoration:underline;color:var(--mut)}
 .msg{min-height:20px;font-size:17px;color:var(--cian);text-align:center}
 
@@ -250,7 +252,7 @@ window.hpTarjetas=function(host){
   if(S.name.trim())L.push('Nombre: '+S.name.trim());
   L.push('');
   ids().forEach(function(id,i){var it=BY[id],q=S.cart[id];L.push((i+1)+'. ['+id+'] '+it.n+(q>1?' ×'+q:'')+' — '+usd(it.p*q))});
-  L.push('','*Total: '+usd(total())+'* ('+pl(units(),'artículo','artículos')+')','',
+  L.push('','*Total: '+usd(total())+'* ('+pl(units(),'artículo','artículos')+')','Retiro en Swaptty Town Center: US$ 1 adicional.','',
    'Entiendo que este mensaje no reserva nada: el primero que paga por Yappy al '+YAPPY+' se lleva la pieza. Pondré «Orden '+S.ord+'» en la descripción del pago.');
   return L.join('\n');
  }
@@ -291,6 +293,7 @@ window.hpTarjetas=function(host){
    '<a class="wa '+(L.length?'yel':'dis')+'" data-wa target="_blank" rel="noopener" '+(L.length?'href="'+esc(waURL())+'"':'aria-disabled="true" tabindex="-1"')+'>'+ic('chat',22)+'Enviar pedido por WhatsApp</a>'+
    '<div class="yap"><div><span>Paga por Yappy al</span><b>'+YAPPY+'</b></div><button class="cpy" type="button" data-copy>'+ic('copy',18)+'Copiar</button></div>'+
    '<p class="msg" role="status" data-msg></p>'+
+   '<p class="pick"><b>Retiro en Swaptty Town Center</b> · costo de US$ 1</p>'+
    '<div class="pay"><p><b>1.</b> Envía tu pedido por WhatsApp.</p><p><b>2.</b> Paga por Yappy al '+YAPPY+(S.ord?' y escribe <b>Orden '+S.ord+'</b> en la descripción del pago.':' y escribe tu número de orden en la descripción del pago.')+'</p><p><b>3.</b> Envía el comprobante por WhatsApp para confirmar.</p></div>'+
    (L.length?'<button class="clr" type="button" data-clear>Vaciar carrito</button>':'');
   return '<div class="cart">'+h+'</div>';
@@ -305,7 +308,8 @@ window.hpTarjetas=function(host){
   '<li><i class="yel">1</i><div><b>Elige y añade al carrito</b><span>Toca una pieza para ver frente y reverso.</span></div></li>'+
   '<li><i class="yel">2</i><div><b>Envía el mensaje por WhatsApp</b><span>Sale con tu lista, el total y tu número de orden.</span></div></li>'+
   '<li><i class="yel">3</i><div><b>Paga por Yappy y confirma</b><span>Al '+YAPPY+', con tu número de orden en la descripción.</span></div></li></ol>'+
-  '<p class="rule"><b>El primero que haga el pago se lleva la tarjeta o el lote.</b> Enviar el mensaje no reserva nada; solo el pago confirma.</p></section></header>'+
+  '<p class="rule"><b>El primero que haga el pago se lleva la tarjeta o el lote.</b> Enviar el mensaje no reserva nada; solo el pago confirma.</p>'+
+  '<p class="pick"><b>Retiro en Swaptty Town Center</b> · costo de US$ 1</p></section></header>'+
   '<div class="tools"><div class="trow"><label class="srch">'+ic('search',20)+'<input id="q" type="search" placeholder="Busca jugador, set o número" aria-label="Buscar piezas" autocomplete="off" enterkeyhint="search"><button id="qx" type="button" aria-label="Borrar búsqueda" hidden>'+ic('close',18)+'</button></label>'+
   '<select class="sort" id="sort" aria-label="Ordenar"><option value="dest">Destacados</option><option value="asc">Precio: menor</option><option value="desc">Precio: mayor</option></select></div>'+
   '<div class="chips" id="chips" role="group" aria-label="Categorías"></div></div>'+
