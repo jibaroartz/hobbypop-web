@@ -278,7 +278,7 @@ window.HP_TARJETAS={
 "n": "Lineth Cedeño · Oro 06/10",
 "d": "2023 Donruss FIFA Women's World Cup · No. 135",
 "p": 10,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Numerada /10",
