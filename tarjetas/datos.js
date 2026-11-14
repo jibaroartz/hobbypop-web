@@ -685,26 +685,19 @@ window.HP_TARJETAS={
 {
 "id": "T3",
 "c": "tcg",
-"n": "Vegeta, Buying Time",
-"d": "Dragon Ball Super Card Game · Zenkai · BT20-098 R",
+"n": "Lote Dragon Ball Super: Vegeta + Son Goku",
+"d": "Dragon Ball Super Card Game · Zenkai BT20 · 2 cartas",
 "p": 1,
 "q": 1,
 "i": 2,
 "b": [
-"Foil"
-]
-},
-{
-"id": "T4",
-"c": "tcg",
-"n": "SS Son Goku, Majin Showdown",
-"d": "Dragon Ball Super Card Game · Zenkai · BT20-086 UC · Z-Leader",
-"p": 1,
-"q": 1,
-"i": 2,
-"b": [
-"Z-Leader"
-]
+"Lote"
+],
+"l": [
+"BT20-098 R Vegeta, Buying Time (foil)",
+"BT20-086 UC SS Son Goku, Majin Showdown (Z-Leader)"
+],
+"x": "Se venden juntas."
 },
 {
 "id": "B1",
