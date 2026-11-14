@@ -365,7 +365,7 @@ window.HP_TARJETAS={
 "n": "Cristiano Ronaldo · Sticker FIFA 365",
 "d": "Panini FIFA 365 · No. 87 · Real Madrid",
 "p": 2,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Sticker"
@@ -470,7 +470,7 @@ window.HP_TARJETAS={
 "n": "Lote de 8 stickers: Mbappé, Haaland y más",
 "d": "Topps Champions League 2024/25, Panini FIFA 365 2026 y Copa América 2024",
 "p": 3,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Lote",
