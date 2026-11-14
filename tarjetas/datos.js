@@ -567,7 +567,7 @@ window.HP_TARJETAS={
 "n": "Deadpool #1 · Cover Stars",
 "d": "2025 Topps Chrome Deadpool · Cover Stars · CS-21",
 "p": 2.5,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Insert"
