@@ -126,7 +126,7 @@ for k, (tt, dd) in SECCIONES.items():
 
 # Jibaro Sale: pagina /JibaroSale/ (archivos en tarjetas/). Solo se genera si mostrar_tarjetas es true
 if MTJ:
-    escribir("JibaroSale/index.html", pagina("Jibaro Sale · Tarjetas en venta | Hobby Pop",
+    escribir("JibaroSale/index.html", pagina("Cards en venta · Jibaro Sale | Hobby Pop",
         "Sets completos de Panamá, paralelas numeradas, GOATs, Marvel, TCG y béisbol. Arma tu carrito, envía tu pedido por WhatsApp y paga por Yappy: el primero que paga se lleva la pieza.",
         "/JibaroSale/", "JibaroSale", og=f"{DOMINIO}/tarjetas/og.jpg"))
     urls.append("/JibaroSale/")
