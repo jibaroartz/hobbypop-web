@@ -156,7 +156,7 @@ window.HP_TARJETAS={
 "n": "Ismael Díaz · Prizm de cuadros",
 "d": "2026 Panini Prizm FIFA World Cup 2026 · Panamá · No. 338",
 "p": 2,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Prizm"
