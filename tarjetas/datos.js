@@ -169,7 +169,7 @@ window.HP_TARJETAS={
 "n": "Lote Copa América: Andrade + Carrasquilla",
 "d": "2024 Panini Prizm Copa América · 2 tarjetas",
 "p": 2,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Lote",
@@ -664,7 +664,7 @@ window.HP_TARJETAS={
 "n": "Monkey D. Luffy · Leader",
 "d": "One Piece Card Game · ST01-001",
 "p": 3,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Leader"
@@ -676,7 +676,7 @@ window.HP_TARJETAS={
 "n": "Monkey D. Luffy · SR",
 "d": "One Piece Card Game · OP01-024 · Super Rare",
 "p": 3,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "SR"
@@ -688,7 +688,7 @@ window.HP_TARJETAS={
 "n": "Lote Dragon Ball Super: Vegeta + Son Goku",
 "d": "Dragon Ball Super Card Game · Zenkai BT20 · 2 cartas",
 "p": 1,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Lote"
@@ -727,7 +727,7 @@ window.HP_TARJETAS={
 "n": "John Cena / Shohei Ohtani · «U Can't See Me»",
 "d": "2026 Topps Now · WBC-0 · 6 de marzo de 2026",
 "p": 5,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Topps Now"
