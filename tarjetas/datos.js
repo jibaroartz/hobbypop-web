@@ -51,7 +51,7 @@ window.HP_TARJETAS={
 "n": "Ismael Díaz · Supernova roja 09/25",
 "d": "2025-26 Panini Obsidian Soccer · Supernova No. 13 · Club León",
 "p": 5,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Numerada /25",
@@ -78,7 +78,7 @@ window.HP_TARJETAS={
 "n": "Ismael Díaz · Snakeskin",
 "d": "2025-26 Panini Prizm FIFA Soccer · No. 207 · Club León",
 "p": 4,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Snakeskin"
@@ -705,7 +705,7 @@ window.HP_TARJETAS={
 "n": "Shohei Ohtani · Rookie Card",
 "d": "2018 Topps Series 2 · No. 700 · Angels",
 "p": 30,
-"q": 1,
+"q": 0,
 "i": 6,
 "b": [
 "RC",
