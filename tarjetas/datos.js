@@ -4,16 +4,6 @@
 window.HP_TARJETAS={
 "cats": [
 [
-"m18",
-"2018 Prizm Mundial",
-"Sets completos de Panamá en su primer Mundial"
-],
-[
-"c24",
-"2024 Prizm Copa América",
-"Sets completos de Panamá en la Copa América 2024"
-],
-[
 "pan",
 "Panamá variado",
 "Tarjetas y stickers sueltos de jugadores panameños"
@@ -42,159 +32,19 @@ window.HP_TARJETAS={
 "bei",
 "Béisbol",
 "Shohei Ohtani"
+],
+[
+"m18",
+"2018 Prizm Mundial",
+"Sets completos de Panamá en su primer Mundial"
+],
+[
+"c24",
+"2024 Prizm Copa América",
+"Sets completos de Panamá en la Copa América 2024"
 ]
 ],
 "items": [
-{
-"id": "M1",
-"c": "m18",
-"n": "Set completo Lazer SP",
-"d": "2018 Panini Prizm World Cup · Panamá · 8 tarjetas",
-"p": 15,
-"q": 1,
-"i": 2,
-"b": [
-"Set completo",
-"SP"
-],
-"l": [
-"217 Blas Pérez",
-"218 Aníbal Godoy",
-"219 Edgar Bárcenas",
-"220 Fidel Escobar",
-"221 Gabriel Torres",
-"222 Jaime Penedo",
-"223 Gabriel Gómez",
-"224 Román Torres"
-],
-"x": "Paralela Lazer, de tiraje corto (SP). Las 8 tarjetas de Panamá, del No. 217 al 224."
-},
-{
-"id": "M2",
-"c": "m18",
-"n": "Set completo Hyper SP",
-"d": "2018 Panini Prizm World Cup · Panamá · 8 tarjetas",
-"p": 15,
-"q": 1,
-"i": 2,
-"b": [
-"Set completo",
-"SP"
-],
-"l": [
-"217 Blas Pérez",
-"218 Aníbal Godoy",
-"219 Edgar Bárcenas",
-"220 Fidel Escobar",
-"221 Gabriel Torres",
-"222 Jaime Penedo",
-"223 Gabriel Gómez",
-"224 Román Torres"
-],
-"x": "Paralela Hyper, de tiraje corto (SP). Las 8 tarjetas de Panamá, del No. 217 al 224."
-},
-{
-"id": "M3",
-"c": "m18",
-"n": "Set completo base + insert",
-"d": "2018 Panini Prizm World Cup · Panamá · 9 tarjetas",
-"p": 8,
-"q": 1,
-"i": 2,
-"b": [
-"Set completo"
-],
-"l": [
-"217 Blas Pérez",
-"218 Aníbal Godoy",
-"219 Edgar Bárcenas",
-"220 Fidel Escobar",
-"221 Gabriel Torres",
-"222 Jaime Penedo",
-"223 Gabriel Gómez",
-"224 Román Torres",
-"C-14 Connections: Aníbal Godoy y Blas Pérez"
-],
-"x": "Las 8 tarjetas base de Panamá más el insert Connections."
-},
-{
-"id": "M4",
-"c": "m18",
-"n": "Set completo Silver + insert Silver",
-"d": "2018 Panini Prizm World Cup · Panamá · 9 tarjetas",
-"p": 18,
-"q": 1,
-"i": 1,
-"b": [
-"Set completo",
-"Silver"
-],
-"l": [
-"217 Blas Pérez",
-"218 Aníbal Godoy",
-"219 Edgar Bárcenas",
-"220 Fidel Escobar",
-"221 Gabriel Torres",
-"222 Jaime Penedo",
-"223 Gabriel Gómez",
-"224 Román Torres",
-"C-14 Connections Silver: Aníbal Godoy y Blas Pérez"
-],
-"x": "Las 8 tarjetas de Panamá en Silver más el insert Connections en Silver."
-},
-{
-"id": "C1",
-"c": "c24",
-"n": "Set completo Silver + inserts",
-"d": "2024 Panini Prizm Copa América · Panamá · 11 tarjetas",
-"p": 22,
-"q": 1,
-"i": 2,
-"b": [
-"Set completo",
-"Silver",
-"RC"
-],
-"l": [
-"142 José Fajardo",
-"143 Andrés Andrade",
-"144 Yoel Bárcenas",
-"145 Adalberto Carrasquilla",
-"146 Michael Murillo",
-"147 Ismael Díaz",
-"148 Aníbal Godoy",
-"149 José Córdoba",
-"New Era No. 12: José Córdoba",
-"Contendientes a la Copa No. 12: Puma Rodríguez",
-"Tarjeta de equipo No. 13: Panamá"
-],
-"x": "Las 8 tarjetas de Panamá en Silver más 3 inserts en Silver."
-},
-{
-"id": "C2",
-"c": "c24",
-"n": "Set completo Hyper",
-"d": "2024 Panini Prizm Copa América · Panamá · 8 tarjetas",
-"p": 15,
-"q": 1,
-"i": 2,
-"b": [
-"Set completo",
-"Hyper",
-"RC"
-],
-"l": [
-"142 José Fajardo",
-"143 Andrés Andrade",
-"144 Yoel Bárcenas",
-"145 Adalberto Carrasquilla",
-"146 Michael Murillo",
-"147 Ismael Díaz",
-"148 Aníbal Godoy",
-"149 José Córdoba"
-],
-"x": "Las 8 tarjetas de Panamá en la paralela Hyper, del No. 142 al 149."
-},
 {
 "id": "P1",
 "c": "pan",
@@ -890,6 +740,156 @@ window.HP_TARJETAS={
 "Topps Now"
 ],
 "x": "Tarjeta Topps Now del Clásico Mundial de Béisbol."
+},
+{
+"id": "M1",
+"c": "m18",
+"n": "Set completo Lazer SP",
+"d": "2018 Panini Prizm World Cup · Panamá · 8 tarjetas",
+"p": 15,
+"q": 1,
+"i": 2,
+"b": [
+"Set completo",
+"SP"
+],
+"l": [
+"217 Blas Pérez",
+"218 Aníbal Godoy",
+"219 Edgar Bárcenas",
+"220 Fidel Escobar",
+"221 Gabriel Torres",
+"222 Jaime Penedo",
+"223 Gabriel Gómez",
+"224 Román Torres"
+],
+"x": "Paralela Lazer, de tiraje corto (SP). Las 8 tarjetas de Panamá, del No. 217 al 224."
+},
+{
+"id": "M2",
+"c": "m18",
+"n": "Set completo Hyper SP",
+"d": "2018 Panini Prizm World Cup · Panamá · 8 tarjetas",
+"p": 15,
+"q": 1,
+"i": 2,
+"b": [
+"Set completo",
+"SP"
+],
+"l": [
+"217 Blas Pérez",
+"218 Aníbal Godoy",
+"219 Edgar Bárcenas",
+"220 Fidel Escobar",
+"221 Gabriel Torres",
+"222 Jaime Penedo",
+"223 Gabriel Gómez",
+"224 Román Torres"
+],
+"x": "Paralela Hyper, de tiraje corto (SP). Las 8 tarjetas de Panamá, del No. 217 al 224."
+},
+{
+"id": "M3",
+"c": "m18",
+"n": "Set completo base + insert",
+"d": "2018 Panini Prizm World Cup · Panamá · 9 tarjetas",
+"p": 8,
+"q": 1,
+"i": 2,
+"b": [
+"Set completo"
+],
+"l": [
+"217 Blas Pérez",
+"218 Aníbal Godoy",
+"219 Edgar Bárcenas",
+"220 Fidel Escobar",
+"221 Gabriel Torres",
+"222 Jaime Penedo",
+"223 Gabriel Gómez",
+"224 Román Torres",
+"C-14 Connections: Aníbal Godoy y Blas Pérez"
+],
+"x": "Las 8 tarjetas base de Panamá más el insert Connections."
+},
+{
+"id": "M4",
+"c": "m18",
+"n": "Set completo Silver + insert Silver",
+"d": "2018 Panini Prizm World Cup · Panamá · 9 tarjetas",
+"p": 18,
+"q": 1,
+"i": 1,
+"b": [
+"Set completo",
+"Silver"
+],
+"l": [
+"217 Blas Pérez",
+"218 Aníbal Godoy",
+"219 Edgar Bárcenas",
+"220 Fidel Escobar",
+"221 Gabriel Torres",
+"222 Jaime Penedo",
+"223 Gabriel Gómez",
+"224 Román Torres",
+"C-14 Connections Silver: Aníbal Godoy y Blas Pérez"
+],
+"x": "Las 8 tarjetas de Panamá en Silver más el insert Connections en Silver."
+},
+{
+"id": "C1",
+"c": "c24",
+"n": "Set completo Silver + inserts",
+"d": "2024 Panini Prizm Copa América · Panamá · 11 tarjetas",
+"p": 22,
+"q": 1,
+"i": 2,
+"b": [
+"Set completo",
+"Silver",
+"RC"
+],
+"l": [
+"142 José Fajardo",
+"143 Andrés Andrade",
+"144 Yoel Bárcenas",
+"145 Adalberto Carrasquilla",
+"146 Michael Murillo",
+"147 Ismael Díaz",
+"148 Aníbal Godoy",
+"149 José Córdoba",
+"New Era No. 12: José Córdoba",
+"Contendientes a la Copa No. 12: Puma Rodríguez",
+"Tarjeta de equipo No. 13: Panamá"
+],
+"x": "Las 8 tarjetas de Panamá en Silver más 3 inserts en Silver."
+},
+{
+"id": "C2",
+"c": "c24",
+"n": "Set completo Hyper",
+"d": "2024 Panini Prizm Copa América · Panamá · 8 tarjetas",
+"p": 15,
+"q": 1,
+"i": 2,
+"b": [
+"Set completo",
+"Hyper",
+"RC"
+],
+"l": [
+"142 José Fajardo",
+"143 Andrés Andrade",
+"144 Yoel Bárcenas",
+"145 Adalberto Carrasquilla",
+"146 Michael Murillo",
+"147 Ismael Díaz",
+"148 Aníbal Godoy",
+"149 José Córdoba"
+],
+"x": "Las 8 tarjetas de Panamá en la paralela Hyper, del No. 142 al 149."
 }
 ]
 };
