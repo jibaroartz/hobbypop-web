@@ -127,6 +127,9 @@ h1{font-weight:900;text-transform:uppercase;font-size:clamp(54px,15vw,112px);lin
 .pay b{color:var(--hueso);font-weight:900}
 .pick{font-size:18px;line-height:1.15;padding:10px 12px;border-radius:14px;border:1px solid rgba(79,224,255,.45);background:rgba(79,224,255,.1)}
 .pick b{font-weight:900;color:var(--cian)}
+.nh{margin-top:-6px;font-size:16px;line-height:1.1;color:var(--am);min-height:0}
+.nh:empty{display:none}
+.fld input::placeholder{color:rgba(243,239,250,.55)}
 .clr{align-self:center;min-height:44px;border:0;background:none;font-size:17px;text-transform:uppercase;letter-spacing:.05em;text-decoration:underline;color:var(--mut)}
 .msg{min-height:20px;font-size:17px;color:var(--cian);text-align:center}
 
@@ -249,13 +252,16 @@ window.hpTarjetas=function(host){
  if(!ids().length){S.ord=null;S.sent=false}
  function waText(){
   var L=['*Pedido #'+S.ord+'* · Hobby Pop'];
-  if(S.name.trim())L.push('Nombre: '+S.name.trim());
+  L.push('Nombre: '+S.name.trim());
   L.push('');
   ids().forEach(function(id,i){var it=BY[id],q=S.cart[id];L.push((i+1)+'. ['+id+'] '+it.n+(q>1?' ×'+q:'')+' — '+usd(it.p*q))});
   L.push('','*Total: '+usd(total())+'* ('+pl(units(),'artículo','artículos')+')','Retiro en Swaptty Town Center: US$ 1 adicional.','',
    'Entiendo que este mensaje no reserva nada: el primero que paga por Yappy al '+YAPPY+' se lleva la pieza. Pondré «Orden '+S.ord+'» en la descripción del pago.');
   return L.join('\n');
  }
+ function canSend(){return ids().length>0&&S.name.trim().length>=2}
+ function waAttrs(a){var ok=canSend();a.className='wa '+(ok?'yel':'dis');if(ok){a.setAttribute('href',waURL());a.removeAttribute('aria-disabled');a.removeAttribute('tabindex')}else{a.removeAttribute('href');a.setAttribute('aria-disabled','true');a.setAttribute('tabindex','-1')}}
+ function nameHint(){return !ids().length?'':(S.name.trim().length>=2?'':'Escribe tu nombre para poder enviar el pedido.')}
  function waURL(){return 'https://wa.me/'+WA+'?text='+encodeURIComponent(waText())}
 
  /* Vista */
@@ -289,8 +295,9 @@ window.hpTarjetas=function(host){
     '<div class="tot"><span>Total · '+pl(units(),'artículo','artículos')+'</span><strong>'+usd(total())+'</strong></div>';
   }
   h+='<div class="rule"><b>El primero que haga el pago se lleva la pieza.</b> Enviar el mensaje por WhatsApp no reserva nada; solo el pago confirma tu compra.</div>'+
-   '<label class="fld">Tu nombre (opcional)<input type="text" data-name maxlength="40" autocomplete="name" value="'+esc(S.name)+'"></label>'+
-   '<a class="wa '+(L.length?'yel':'dis')+'" data-wa target="_blank" rel="noopener" '+(L.length?'href="'+esc(waURL())+'"':'aria-disabled="true" tabindex="-1"')+'>'+ic('chat',22)+'Enviar pedido por WhatsApp</a>'+
+   '<label class="fld">Tu nombre (obligatorio)<input type="text" data-name maxlength="40" autocomplete="name" required aria-required="true" placeholder="Nombre y apellido" value="'+esc(S.name)+'"></label>'+
+   '<p class="nh" data-nh>'+nameHint()+'</p>'+
+   '<a class="wa '+(canSend()?'yel':'dis')+'" data-wa target="_blank" rel="noopener" '+(canSend()?'href="'+esc(waURL())+'"':'aria-disabled="true" tabindex="-1"')+'>'+ic('chat',22)+'Enviar pedido por WhatsApp</a>'+
    '<div class="yap"><div><span>Paga por Yappy al</span><b>'+YAPPY+'</b></div><button class="cpy" type="button" data-copy>'+ic('copy',18)+'Copiar</button></div>'+
    '<p class="msg" role="status" data-msg></p>'+
    '<p class="pick"><b>Retiro en Swaptty Town Center</b> · costo de US$ 1</p>'+
@@ -399,7 +406,7 @@ window.hpTarjetas=function(host){
   if((b=t.closest('[data-dec]'))){var i2=b.getAttribute('data-dec');if(S.cart[i2]>1){S.cart[i2]--;changed()}return}
   if(t.closest('[data-clear]')){S.cart={};changed();return}
   if((b=t.closest('[data-copy]'))){copyYappy(b);return}
-  if((b=t.closest('[data-wa]'))){if(!ids().length){e.preventDefault();return}b.setAttribute('href',waURL());S.sent=true;save();return}
+  if((b=t.closest('[data-wa]'))){if(!canSend()){e.preventDefault();return}b.setAttribute('href',waURL());S.sent=true;save();return}
   if((b=t.closest('[data-close]'))){closeOv(b.closest('.ov').id);return}
   if(t.classList&&t.classList.contains('ov')){closeOv(t.id);return}
   if(t.id==='lbi'){var l=$('lb'),z=l.classList.contains('zoom');l.className='lb on '+(z?'fit':'zoom');$('lbh').textContent=z?'Toca la foto para acercar':'Desliza para moverte · toca para alejar';if(!z){l.scrollLeft=(l.scrollWidth-l.clientWidth)/2;l.scrollTop=(l.scrollHeight-l.clientHeight)/2}return}
@@ -412,7 +419,7 @@ window.hpTarjetas=function(host){
   if(t.id==='q'){V.q=t.value;renderList();return}
   if(t.hasAttribute&&t.hasAttribute('data-name')){S.name=t.value.slice(0,40);save();
    root.querySelectorAll('[data-name]').forEach(function(i){if(i!==t)i.value=S.name});
-   if(ids().length)root.querySelectorAll('[data-wa]').forEach(function(a){a.setAttribute('href',waURL())})}
+   root.querySelectorAll('[data-wa]').forEach(waAttrs);root.querySelectorAll('[data-nh]').forEach(function(p){p.textContent=nameHint()})}
  });
  $('sort').addEventListener('change',function(){V.sort=this.value;renderList()});
  $('q').addEventListener('keydown',function(e){if(e.key==='Enter')this.blur()});
