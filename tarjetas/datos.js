@@ -104,7 +104,7 @@ window.HP_TARJETAS={
 "n": "Michael Murillo · Prizm de rombos",
 "d": "2026 Panini Prizm FIFA World Cup 2026 · Panamá · No. 343",
 "p": 2,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Prizm"
@@ -117,7 +117,7 @@ window.HP_TARJETAS={
 "n": "Adalberto Carrasquilla · Silver Wave",
 "d": "2026 Panini Prizm FIFA World Cup 2026 · Panamá · No. 339",
 "p": 2,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Silver Wave"
@@ -292,7 +292,7 @@ window.HP_TARJETAS={
 "n": "Lionel Messi · Icon",
 "d": "Panini Adrenalyn XL FIFA World Cup 2026 · No. 24 · Argentina",
 "p": 5,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Icon"
