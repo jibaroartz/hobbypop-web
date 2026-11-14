@@ -318,7 +318,7 @@ window.HP_TARJETAS={
 "n": "Cristiano Ronaldo · Icon Rusia 2018",
 "d": "Panini Adrenalyn XL FIFA World Cup Russia 2018 · No. 443 · Portugal",
 "p": 5,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Icon"
