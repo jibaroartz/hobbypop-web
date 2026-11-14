@@ -41,6 +41,8 @@ _vj = RAIZ / "venta" / "venta.js"
 VENTAV = hashlib.md5(_vj.read_bytes()).hexdigest()[:8] if _vj.exists() else ""
 _tj = [RAIZ / "tarjetas" / "tarjetas.js", RAIZ / "tarjetas" / "datos.js"]
 TJV = hashlib.md5(b"".join(f.read_bytes() for f in _tj if f.exists())).hexdigest()[:8]
+# version de app.js y styles.css para que el navegador no use una copia vieja tras publicar
+ASSETV = hashlib.md5((RAIZ / "js" / "app.js").read_bytes() + (RAIZ / "css" / "styles.css").read_bytes()).hexdigest()[:8]
 DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts, "config": {"tiendas": MT, "vendedores": MV, "venta": MVN, "tarjetas": MTJ}, "ventav": VENTAV, "tjv": TJV}, ensure_ascii=False).replace("</", "<\\/")
 e = html.escape
 
@@ -69,12 +71,12 @@ def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True, og=None, entrada=""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css?v={ASSETV}">
 </head>
 <body>
 {body}
 <script>window.DATA={DATA};window.RUTA={json.dumps(ruta_js)};</script>
-<script src="/js/app.js"></script>
+<script src="/js/app.js?v={ASSETV}"></script>
 </body>
 </html>
 """
