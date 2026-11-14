@@ -18,11 +18,13 @@ cargar = lambda n: json.loads((RAIZ / "data" / n).read_text(encoding="utf-8"))
 grupos, tiendas, vendedores = cargar("grupos.json"), cargar("tiendas.json"), cargar("vendedores.json")
 cuerpo = (RAIZ / "src" / "body.html").read_text(encoding="utf-8")
 # Interruptores de secciones (data/config.json): false = oculta, sin borrar nada
-cfg = {"mostrar_tiendas": True, "mostrar_vendedores": True, "mostrar_venta": True}
+cfg = {"mostrar_tiendas": True, "mostrar_vendedores": True, "mostrar_venta": True, "mostrar_tarjetas": False}
 if (RAIZ / "data" / "config.json").exists(): cfg.update(cargar("config.json"))
 MT, MV = cfg["mostrar_tiendas"], cfg["mostrar_vendedores"]
 MVN = cfg["mostrar_venta"]
 cuerpo = cuerpo.replace("%%H_VN%%", "" if MVN else " hidden")
+MTJ = cfg["mostrar_tarjetas"]
+cuerpo = cuerpo.replace("%%H_TJ%%", "" if MTJ else " hidden")
 cuerpo = (cuerpo.replace("%%H_T%%", "" if MT else " hidden").replace("%%H_V%%", "" if MV else " hidden")
                 .replace("%%H_D%%", "" if (MT or MV) else " hidden"))
 
@@ -37,7 +39,9 @@ fecha_es = lambda f: f"{int(f[8:])} de {MESES[int(f[5:7])-1]} de {f[:4]}"
 import hashlib
 _vj = RAIZ / "venta" / "venta.js"
 VENTAV = hashlib.md5(_vj.read_bytes()).hexdigest()[:8] if _vj.exists() else ""
-DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts, "config": {"tiendas": MT, "vendedores": MV, "venta": MVN}, "ventav": VENTAV}, ensure_ascii=False).replace("</", "<\\/")
+_tj = [RAIZ / "tarjetas" / "tarjetas.js", RAIZ / "tarjetas" / "datos.js"]
+TJV = hashlib.md5(b"".join(f.read_bytes() for f in _tj if f.exists())).hexdigest()[:8]
+DATA = json.dumps({"grupos": grupos, "tiendas": tiendas, "vendedores": vendedores, "posts": posts, "config": {"tiendas": MT, "vendedores": MV, "venta": MVN, "tarjetas": MTJ}, "ventav": VENTAV, "tjv": TJV}, ensure_ascii=False).replace("</", "<\\/")
 e = html.escape
 
 def pagina(titulo, desc, ruta_url, ruta_js="", indexar=True, og=None, entrada=""):
@@ -117,6 +121,15 @@ for k, (tt, dd) in SECCIONES.items():
         continue
     escribir(f"{k}/index.html", pagina(f"{tt} | Hobby Pop", dd, f"/{k}/", k))
     urls.append(f"/{k}/")
+
+# Tarjetas en venta (tarjetas/): solo se genera la pagina si mostrar_tarjetas es true
+if MTJ:
+    escribir("tarjetas/index.html", pagina("Tarjetas en venta | Hobby Pop",
+        "Sets completos de Panamá, paralelas numeradas, GOATs, Marvel, TCG y béisbol. Arma tu carrito, envía tu pedido por WhatsApp y paga por Yappy: el primero que paga se lleva la pieza.",
+        "/tarjetas/", "tarjetas", og=f"{DOMINIO}/tarjetas/og.jpg"))
+    urls.append("/tarjetas/")
+else:
+    (RAIZ / "tarjetas" / "index.html").unlink(missing_ok=True)
 
 for p in posts:
     ruta = f"/blog/{p['s']}/"

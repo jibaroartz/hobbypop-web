@@ -1,5 +1,6 @@
 {
  "mostrar_tiendas": false,
  "mostrar_vendedores": false,
- "mostrar_venta": false
+ "mostrar_venta": false,
+ "mostrar_tarjetas": false
 }

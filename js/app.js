@@ -18,9 +18,12 @@
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   /* Rutas */
-  var PAGES=['inicio','tiendas','vendedores','comunidad','blog','venta','contacto','reglas'];
+  var PAGES=['inicio','tiendas','vendedores','comunidad','blog','venta','tarjetas','contacto','reglas'];
   var ventaOn=false;
   function loadVenta(){if(ventaOn)return;ventaOn=true;var sc=document.createElement('script');sc.src='/venta/venta.js?v='+(D.ventav||'');sc.onload=function(){if(window.hpVenta)window.hpVenta($('#venta-host'))};sc.onerror=function(){ventaOn=false;var h=$('#venta-host');if(h)h.innerHTML='<p class="small">No se pudo cargar la venta. Recarga la página.</p>'};document.head.appendChild(sc)}
+  var tjOn=false;
+  function loadTarjetas(){if(tjOn)return;tjOn=true;var v='?v='+(D.tjv||''),fail=function(){tjOn=false;var h=$('#tarjetas-host');if(h)h.innerHTML='<p class="small">No se pudieron cargar las tarjetas. Recarga la página.</p>'};
+    var a=document.createElement('script');a.src='/tarjetas/datos.js'+v;a.onerror=fail;a.onload=function(){var b=document.createElement('script');b.src='/tarjetas/tarjetas.js'+v;b.onerror=fail;b.onload=function(){if(window.hpTarjetas)window.hpTarjetas($('#tarjetas-host'))};document.head.appendChild(b)};document.head.appendChild(a)}
   function closeMenu(){$('#hdr').classList.remove('open');$('#menu-btn').setAttribute('aria-expanded','false')}
   function findStore(h){for(var k=0;k<STORES.length;k++)if('tienda-'+STORES[k].s===h)return STORES[k];return null}
   function findSeller(h){for(var k=0;k<SELLERS.length;k++)if('vendedor-'+SELLERS[k].s===h)return SELLERS[k];return null}
@@ -31,6 +34,7 @@
     if(CF.tiendas===false&&(h==='tiendas'||h.indexOf('tienda-')===0))h='inicio';
     if(CF.vendedores===false&&(h==='vendedores'||h.indexOf('vendedor-')===0))h='inicio';
     if(CF.venta===false&&h==='venta')h='inicio';
+    if(CF.tarjetas===false&&h==='tarjetas')h='inicio';
     page=nav=h;
     if(h.indexOf('tienda-')===0){var st=findStore(h);if(st){renderTienda(st);page='perfil-tienda';nav='tiendas'}else{page=nav='tiendas'}}
     else if(h.indexOf('vendedor-')===0){var s=findSeller(h);if(s){renderPerfil(s);page='perfil';nav='vendedores'}else{page=nav='vendedores'}}
@@ -39,6 +43,7 @@
     $$('[data-page]').forEach(function(p){p.hidden=p.getAttribute('data-page')!==page});
     $$('[data-nav]').forEach(function(a){var on=a.getAttribute('data-nav')===nav;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
     if(page==='venta')loadVenta();
+    if(page==='tarjetas')loadTarjetas();
     closeMenu();window.scrollTo(0,0);setTimeout(reveal,60);
   }
   var navs=0;
