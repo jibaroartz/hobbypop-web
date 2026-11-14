@@ -122,14 +122,14 @@ for k, (tt, dd) in SECCIONES.items():
     escribir(f"{k}/index.html", pagina(f"{tt} | Hobby Pop", dd, f"/{k}/", k))
     urls.append(f"/{k}/")
 
-# Tarjetas en venta (tarjetas/): solo se genera la pagina si mostrar_tarjetas es true
+# Jibaro Sale: pagina /JibaroSale/ (archivos en tarjetas/). Solo se genera si mostrar_tarjetas es true
 if MTJ:
-    escribir("tarjetas/index.html", pagina("Tarjetas en venta | Hobby Pop",
+    escribir("JibaroSale/index.html", pagina("Jibaro Sale · Tarjetas en venta | Hobby Pop",
         "Sets completos de Panamá, paralelas numeradas, GOATs, Marvel, TCG y béisbol. Arma tu carrito, envía tu pedido por WhatsApp y paga por Yappy: el primero que paga se lleva la pieza.",
-        "/tarjetas/", "tarjetas", og=f"{DOMINIO}/tarjetas/og.jpg"))
-    urls.append("/tarjetas/")
+        "/JibaroSale/", "JibaroSale", og=f"{DOMINIO}/tarjetas/og.jpg"))
+    urls.append("/JibaroSale/")
 else:
-    (RAIZ / "tarjetas" / "index.html").unlink(missing_ok=True)
+    (RAIZ / "JibaroSale" / "index.html").unlink(missing_ok=True)
 
 for p in posts:
     ruta = f"/blog/{p['s']}/"
@@ -170,7 +170,10 @@ for p in posts:
     escribir(f"blog/{p['s']}/index.html", pagina(f"{p['t']} | Blog de Hobby Pop", p["r"], ruta, f"blog-{p['s']}", og=p.get("img") or None, entrada=art))
     urls.append(ruta)
 
-escribir("404.html", pagina("Página no encontrada | Hobby Pop", "Esta página no existe. Vuelve al inicio de Hobby Pop.", "/404.html", "", indexar=False))
+p404 = pagina("Página no encontrada | Hobby Pop", "Esta página no existe. Vuelve al inicio de Hobby Pop.", "/404.html", "", indexar=False)
+# /jibarosale, /JIBAROSALE, etc. (GitHub Pages distingue mayusculas) -> /JibaroSale/
+if MTJ: p404 = p404.replace("<head>", "<head>\n<script>if(/^\\/jibarosale\\/?$/i.test(location.pathname))location.replace('/JibaroSale/');</script>", 1)
+escribir("404.html", p404)
 escribir("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
          "".join(f"  <url><loc>{DOMINIO}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
 escribir("robots.txt", f"User-agent: *\nDisallow: /stackerz/\nAllow: /\nSitemap: {DOMINIO}/sitemap.xml\n")

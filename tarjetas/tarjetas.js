@@ -298,7 +298,7 @@ window.hpTarjetas=function(host){
 
  root.innerHTML='<style>'+CSS+'</style><div class="tj">'+
   '<p class="aviso" role="note">El primero que paga se lleva la pieza. Enviar el mensaje no reserva nada.</p>'+
-  '<header class="hero"><div class="hl"><span class="tag">Venta · Hobby Pop</span><h1>Tarjetas <span class="gt">en venta</span></h1>'+
+  '<header class="hero"><div class="hl"><span class="tag">Jibaro Sale · Hobby Pop</span><h1>Tarjetas <span class="gt">en venta</span></h1>'+
   '<p class="lead">Sets completos de Panamá, paralelas numeradas, GOATs, Marvel, TCG y béisbol. Todas sin graduar y en perfecto estado, salvo que la ficha diga lo contrario.</p>'+
   '<div class="stats"><div class="st"><b>'+avail+'</b><span>Disponibles</span></div><div class="st"><b>'+CATS.length+'</b><span>Categorías</span></div><div class="st"><b>'+(isFinite(minP)?usd(minP):'—')+'</b><span>Precios desde</span></div></div></div>'+
   '<section class="how glass" aria-label="Así funciona"><h2>Así funciona</h2><ol class="steps">'+
