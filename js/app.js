@@ -22,7 +22,8 @@
   var ventaOn=false;
   function loadVenta(){if(ventaOn)return;ventaOn=true;var sc=document.createElement('script');sc.src='/venta/venta.js?v='+(D.ventav||'');sc.onload=function(){if(window.hpVenta)window.hpVenta($('#venta-host'))};sc.onerror=function(){ventaOn=false;var h=$('#venta-host');if(h)h.innerHTML='<p class="small">No se pudo cargar la venta. Recarga la página.</p>'};document.head.appendChild(sc)}
   var tjOn=false;
-  function loadTarjetas(){if(tjOn)return;tjOn=true;var v='?v='+(D.tjv||''),fail=function(){tjOn=false;var h=$('#tarjetas-host');if(h)h.innerHTML='<p class="small">No se pudieron cargar las tarjetas. Recarga la página.</p>'};
+  function loadTarjetas(){if(tjOn)return;tjOn=true;
+    if((D.config||{}).tarjetas===false){var hc=$('#tarjetas-host');if(hc)hc.innerHTML='<div class="glass" style="max-width:640px;margin:24px auto;padding:28px 22px;text-align:center;border-radius:24px"><span class="chip" style="display:inline-block;background:#FFC400;color:#140B33;border-radius:999px;padding:6px 14px 4px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:15px">Jibaro Sale</span><h1 style="margin:14px 0 10px;font-weight:900;text-transform:uppercase;font-size:clamp(44px,12vw,76px);line-height:.9">La venta ya <span style="color:#FFC400">terminó</span></h1><p style="margin:0 0 20px;font-size:21px;line-height:1.2">¡Gracias a todos los que compraron! Estén pendientes a lo próximo que se anunciará en Hobby Pop.</p><div class="row" style="justify-content:center"><a class="btn" href="/#inicio">Ir a Hobby Pop</a><a class="btn g" href="/#comunidad">Ver los grupos</a></div></div>';return}var v='?v='+(D.tjv||''),fail=function(){tjOn=false;var h=$('#tarjetas-host');if(h)h.innerHTML='<p class="small">No se pudieron cargar las tarjetas. Recarga la página.</p>'};
     var a=document.createElement('script');a.src='/tarjetas/datos.js'+v;a.onerror=fail;a.onload=function(){var b=document.createElement('script');b.src='/tarjetas/tarjetas.js'+v;b.onerror=fail;b.onload=function(){if(window.hpTarjetas)window.hpTarjetas($('#tarjetas-host'))};document.head.appendChild(b)};document.head.appendChild(a)}
   function closeMenu(){$('#hdr').classList.remove('open');$('#menu-btn').setAttribute('aria-expanded','false')}
   function findStore(h){for(var k=0;k<STORES.length;k++)if('tienda-'+STORES[k].s===h)return STORES[k];return null}
@@ -35,7 +36,7 @@
     if(CF.vendedores===false&&(h==='vendedores'||h.indexOf('vendedor-')===0))h='inicio';
     if(CF.venta===false&&h==='venta')h='inicio';
     if(h.toLowerCase()==='jibarosale')h='JibaroSale';
-    if(CF.tarjetas===false&&h==='JibaroSale')h='inicio';
+    if(CF.tarjetas===false&&h==='JibaroSale'&&window.RUTA!=='JibaroSale')h='inicio';
     page=nav=h;
     if(h.indexOf('tienda-')===0){var st=findStore(h);if(st){renderTienda(st);page='perfil-tienda';nav='tiendas'}else{page=nav='tiendas'}}
     else if(h.indexOf('vendedor-')===0){var s=findSeller(h);if(s){renderPerfil(s);page='perfil';nav='vendedores'}else{page=nav='vendedores'}}

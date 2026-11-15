@@ -131,7 +131,10 @@ if MTJ:
         "/JibaroSale/", "JibaroSale", og=f"{DOMINIO}/tarjetas/og.jpg"))
     urls.append("/JibaroSale/")
 else:
-    (RAIZ / "JibaroSale" / "index.html").unlink(missing_ok=True)
+    # venta cerrada: el enlace compartido muestra "La venta ya terminó" (sin menú, sin indexar)
+    escribir("JibaroSale/index.html", pagina("Jibaro Sale terminó | Hobby Pop",
+        "La venta ya terminó. ¡Gracias a todos los que compraron! Estén pendientes a lo próximo que se anunciará en Hobby Pop.",
+        "/JibaroSale/", "JibaroSale", og=f"{DOMINIO}/tarjetas/og.jpg", indexar=False))
 
 for p in posts:
     ruta = f"/blog/{p['s']}/"
@@ -174,7 +177,7 @@ for p in posts:
 
 p404 = pagina("Página no encontrada | Hobby Pop", "Esta página no existe. Vuelve al inicio de Hobby Pop.", "/404.html", "", indexar=False)
 # /jibarosale, /JIBAROSALE, etc. (GitHub Pages distingue mayusculas) -> /JibaroSale/
-if MTJ: p404 = p404.replace("<head>", "<head>\n<script>if(/^\\/jibarosale\\/?$/i.test(location.pathname))location.replace('/JibaroSale/');</script>", 1)
+p404 = p404.replace("<head>", "<head>\n<script>if(/^\\/jibarosale\\/?$/i.test(location.pathname))location.replace('/JibaroSale/');</script>", 1)
 escribir("404.html", p404)
 escribir("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
          "".join(f"  <url><loc>{DOMINIO}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
