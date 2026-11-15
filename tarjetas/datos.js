@@ -439,7 +439,7 @@ window.HP_TARJETAS={
 "n": "Lote de 2 stickers FIFA 365 · Lamine Yamal",
 "d": "Panini FIFA 365 2026 · 2 stickers",
 "p": 1,
-"q": 1,
+"q": 0,
 "i": 2,
 "b": [
 "Lote",
