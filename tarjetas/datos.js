@@ -812,7 +812,7 @@ window.HP_TARJETAS={
 "n": "Set completo Silver + insert Silver",
 "d": "2018 Panini Prizm World Cup · Panamá · 9 tarjetas",
 "p": 18,
-"q": 1,
+"q": 0,
 "i": 1,
 "b": [
 "Set completo",
